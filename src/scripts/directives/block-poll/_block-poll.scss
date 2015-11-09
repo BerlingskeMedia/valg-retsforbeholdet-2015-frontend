@@ -1,0 +1,23 @@
+.block-poll {
+  width: 100%;
+  height: 50px;
+}
+
+.red.block-rect {
+  fill: $red;
+}
+
+.blue.block-rect {
+  fill: $blue;
+}
+
+.block-value,
+.block-letters {
+  font-size: 40px;
+  font-weight: bold;
+  fill: #fff;
+}
+
+.block-letters {
+  text-transform: uppercase;
+}
