@@ -1,0 +1,141 @@
+$grey: #eee;
+$dark-grey: #d5d5d5;
+$red: #BB242E;
+$black: #666;
+$white: #FFF;
+$light-red: lighten($red, 20);
+$lighter-red: lighten($red, 40);
+$blue: #136A90;
+$light-blue: lighten($blue, 20);
+$lighter-blue: lighten($blue, 40);
+
+[ng-app] {
+  font-family: $main-font;
+}
+
+a {
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.clearfix {
+  clear: both;
+}
+
+.mobile-container {
+  background-color: $grey;
+  padding: 1px 15px;
+}
+
+.breadcrumbs {
+  list-style: none;
+  padding: 1em;
+  margin: 0;
+  overflow: hidden;
+
+  a {
+    color: $primary;
+    text-decoration: none;
+  }
+}
+
+.breadcrumb {
+  float: left;
+  margin-right: 5px;
+
+  &:not(:first-child):before {
+    content: "> ";
+    color: $black;
+  }
+}
+
+.table-container {
+  background-color: $grey;
+  padding: 1em;
+}
+
+.number {
+  text-align: right;
+}
+
+table {
+  margin: 2em 0;
+  border-collapse: collapse;
+}
+
+td,th {
+  padding: .7em;
+}
+
+thead th {
+  background-color: $secondary;
+  color: $white;
+  font-weight: normal;
+  border-spacing: 0;
+  text-align: left;
+  padding: .7em;
+  border-bottom: none;
+  &:first-child {
+    text-align: left;
+    padding-left: 15px;
+  }
+}
+
+.striped {
+  background-color: $white;
+  width: 100%;
+  border-collapse: collapse;
+
+  tbody {
+    tr:nth-child(odd) {
+      background-color: $grey;
+    }
+    tr {
+      border: 2px solid $white;
+      border-top: none;
+    }
+  }
+}
+
+.positive:before {
+  color: $positive;
+}
+
+.negative:before {
+  color: $negative;
+}
+.app-header {
+  margin: 0;
+  line-height: 1.2em;
+}
+.party-logo {
+  text-align: center;
+  height: 1.2em;
+  vertical-align: bottom;
+  margin-right: 0.3em;
+}
+
+
+// Import directive SCSS
+@import "../scripts/directives/block-poll/block-poll";
+@import "../scripts/directives/election-map/election-map";
+
+// Import pages SCSS
+@import "../scripts/pages/map/map";
+@import "../scripts/pages/party/party";
+@import "../scripts/pages/table/table";
+@import "../scripts/pages/teaser/teaser";
+
+// Import responsive SCSS
+@import "responsive";
+
+
+// Import logos SCSS
+@import "partylogos";
+
+// Import ionicons
+@import "//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";

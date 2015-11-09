@@ -1,0 +1,29 @@
+{
+  "name": "valg-retsforbeholdet-2015",
+  "version": "1.0",
+  "description": "a politiko.dk application to show the results of the Danish election on the retractions of their EU legal reservations.",
+  "author": "jonaslading",
+  "devDependencies": {
+    "bower-main": "^0.2.14",
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-angular-templatecache": "^1.6.0",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-changed": "^1.2.1",
+    "gulp-cleanhtml": "^0.1.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-connect": "^2.2.0",
+    "gulp-header": "^1.2.2",
+    "gulp-if": "^1.2.5",
+    "gulp-imagemin": "^2.2.1",
+    "gulp-jade": "^1.0.0",
+    "gulp-minify-css": "^1.0.0",
+    "gulp-ng-annotate": "^0.5.2",
+    "gulp-plumber": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.0",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
+    "lazypipe": "^0.2.3"
+  }
+}

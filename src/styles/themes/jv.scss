@@ -1,0 +1,12 @@
+$primary: rgb(215, 102, 31);
+$primary-light: #f87016;
+$secondary: rgb(12, 75, 125);
+$positive: rgb(140, 198, 63);
+$negative: rgb(244, 86, 57);
+
+$main-font: 'PT Sans', sans-serif;
+
+@import '../app';
+
+// Import font
+@import url("//fonts.googleapis.com/css?family=PT+Sans:400,700");

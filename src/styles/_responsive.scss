@@ -1,0 +1,59 @@
+@media (min-width: 801px) {
+  [ng-app] {
+    font-size: 18px;
+  }
+
+  .mobile-show {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .party-header p {
+    font-size: .8em;
+  }
+}
+
+@media (max-width: 800px) {
+  [ng-app] {
+    font-size: 14px;
+  }
+
+  .mobile-hide {
+    display: none;
+  }
+
+  .map-tip {
+    display: none;
+  }
+
+  th {
+    padding: 0.5em 0.7em;
+  }
+
+  .tab-nav {
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;;
+    line-height: 30px;
+    border: 1px solid $white;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  h1.app-header {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 320px) {
+  [ng-app] {
+    font-size: 13px;
+  }
+
+  .party-table th {
+    font-size: .9em;
+  }
+}

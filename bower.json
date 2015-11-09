@@ -1,0 +1,11 @@
+{
+  "name": "valg-retsforbeholdet-2015",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-touch": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "d3": "~3.5.5",
+    "d3-tip": "#442ac76b4e1130143ed44790d4d69dc1e7ae8450"
+  }
+}
