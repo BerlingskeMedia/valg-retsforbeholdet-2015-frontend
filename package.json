@@ -1,6 +1,6 @@
 {
   "name": "valg-retsforbeholdet-2015",
-  "version": "1.0",
+  "version": "0.0.0",
   "description": "a politiko.dk application to show the results of the Danish election on the retractions of their EU legal reservations.",
   "author": "jonaslading",
   "devDependencies": {
