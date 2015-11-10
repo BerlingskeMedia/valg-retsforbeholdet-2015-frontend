@@ -12,25 +12,18 @@ app.directive('electionThemer', function(){
 
         };
 
-        // todo: setup electionThemer functionality when the directive becomes relevant
         if(window.location != window.parent.location){
-          // the page is in an iframe
-          /*
-           window.addEveneListener "message", (event) ->
-           themename = evnet.data
-           themeItUp()
-          */
+          window.addEventListener("message", function(event) {
+              themename = event.data;
+              return themeItUp();
+            }
+          );
         }else{
-          // the page is not in an iframe
-
-          /*
-          themename = attrs.electionThemer
-
-            if (themename != '') {
-              themeItUp()
-            }*/
+            themename = attrs.electionThemer;
         }
-
+        if (themename !== '') {
+          return themeItUp();
+        }
 
       }
     };
