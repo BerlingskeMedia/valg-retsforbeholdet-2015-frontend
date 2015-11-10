@@ -15,18 +15,18 @@ app.controller("MapController", ["$scope", "$http", "$timeout", function($scope,
     }
   };
 
-  $scope.toggleshowMan = function(value) {
+  $scope.toggleshowPer = function(value) {
 
     if(enableMouseover === false){
       return;
     }
 
     if(value === true || value === false){
-      $scope.showMan = value
+      $scope.showPer = value
     } else if(!doubleClickCheck){
       doubleClickCheck = true;
 
-      $scope.showMan = !$scope.showMan;
+      $scope.showPer = !$scope.showPer;
 
       $timeout(function(){
         doubleClickCheck = false
@@ -48,8 +48,8 @@ app.controller("MapController", ["$scope", "$http", "$timeout", function($scope,
   $http.get(apiIp+"/map").then(function(data){
     if(data.data) {
       $scope.json.map = data.data;
-      if (data.data.votes_counted_pct >= 95 && data.data.blue_block.mandates != 0) {
-        $scope.showMan = true;
+      if (data.data.results && data.data.results.JA.votes_pct + data.data.results.NEJ.votes_pct >= 95) {
+        $scope.showPer = true;
         enableMouseover = true;
       }
     }

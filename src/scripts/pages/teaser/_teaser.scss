@@ -1,0 +1,19 @@
+.teaser-header {
+  background-color: $grey;
+  padding: .3em 0.1em .3em 10px;
+}
+
+.call-to-action {
+  float: right;
+  margin-right: 10px;
+}
+
+.call-to-action-mobile {
+  background-color: $grey;
+  color: $primary;
+  font-size: 1.2em;
+  padding: 0 10px 10px 10px;
+  width: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+}

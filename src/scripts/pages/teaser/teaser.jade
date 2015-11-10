@@ -1,0 +1,13 @@
+div.tab-container
+  div.teaser-header Optalte stemmer {{json.map.votes_counted_pct | number}}%
+    a(ng-href="{{appUrl}}" target="_top").call-to-action.mobile-hide Klik her for at følge valgets udvikling
+    .clearfix
+  div.tab-body(ng-mouseover="toggleshowPer(false)" ng-mouseout="toggleshowPer(true)" ng-if="!detectmobile()")
+    div.block-poll(block-poll)
+    ul.party-poll-header.mobile-hide
+      li.party-header(ng-repeat="party in json.map.parties")
+        i.partylogo.small-size(ng-class="party.party_letter")
+        p(ng-show="showMan") {{party.mandates}}
+        p(ng-hide="showMan") {{party.votes_pct | number}}%
+    .clearfix
+  a(ng-href="{{appUrl}}" target="_top").call-to-action-mobile.mobile-show Klik her for at følge valgets udvikling

@@ -37,6 +37,8 @@
     box-sizing: border-box;;
     line-height: 30px;
     border: 1px solid $white;
+    border-left: none;
+    border-right: none;
 
     &:after {
       display: none;

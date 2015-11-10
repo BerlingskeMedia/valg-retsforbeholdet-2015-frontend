@@ -2,9 +2,9 @@ div.tab-container
   ul.tab-header
     li.tab-nav.active(ng-click="tab='2011'") Optalte stemmer {{json.map.votes_counted_pct | number}}%
   .clearfix
-  div.tab-body(ng-click="toggleshowMan()" ng-if="detectmobile()")
+  div.tab-body(ng-click="toggleshowPer()" ng-if="detectmobile()")
     div.block-poll(block-poll)
-  div.tab-body(ng-mouseover="toggleshowMan(false)" ng-mouseout="toggleshowMan(true)" ng-if="!detectmobile()")
+  div.tab-body(ng-mouseover="toggleshowPer(false)" ng-mouseout="toggleshowPer(true)" ng-if="!detectmobile()")
     div.block-poll(block-poll)
     ul.party-poll-header.mobile-hide
       li.party-header(ng-repeat="party in json.map.parties")

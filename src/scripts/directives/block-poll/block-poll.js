@@ -11,8 +11,6 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
         .attr("width", "100%")
         .attr("height", "100%");
 
-      alert("test");
-
 
       var render = function(data){
 
@@ -120,28 +118,24 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
         }
       });
 
-      /*scope.$watch("showMan", function(data){
+      /*scope.$watch("showPer", function(data){
         if(data === false) {
 
           redBlockValue.text(function(d){
-            return $filter('number')(d.votes_pct);
+            return "JA";
           });
           blueBlockValue.text(function(d) {
-            return $filter('number')(d.votes_pct);
+            return "NEJ"
           });
 
         }else if(data === true) {
-          if (svgWidth > 780) {
-            extention = "mandater";
-          } else {
-            extention = "";
-          }
+
 
           redBlockValue.text(function(d){
-            return d.mandates+" "+extention;
+            return d.votes_pct+"%";
           });
           blueBlockValue.text(function(d) {
-            return d.mandates+" "+extention;
+            return d.votes_pct+"%";
           });
         }
       });*/
