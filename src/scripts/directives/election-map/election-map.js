@@ -12,38 +12,33 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
           var counted = $filter('number')(data.votes_counted_pct, 1);
 
           var html = "<h2 class=\"map-tip-header\">";
-          html+= "<div class=\"map-tip-counted\">Optalt: </div>"; // removed #{counted}%
-          html+= data.name+"</h2>";
-
-          /*
-           todo: setup tip content relevant to validated eu poll data
-           if data.parties.length is 0
-           html+= "<p>Afventer optælling fra kredsen.</p>"
-           else
-           html+= "<table class=\"map-tip-table striped\">"
-           html+= "<tbody>"
-
-           for party in data.parties
-           percent = $filter('number')(party.votes_pct, 1)
-
-           html+= "<tr>"
-           html+= "<td><i class=\"partylogo #{party.party_letter}\"></i></td>"
-           html+= "<td>#{party.party_name}</td>"
-           html+= "<td class=\"number\">#{percent}%</td>"
-           html+= "</tr>"
-
-           html+= "</tbody>"
-           html+= "</table>"
-
-           if data.blue_block_votes_pct isnt 0
-           html+= "<div class=\"map-tip-block\">"
-           html+= "<div class=\"map-tip-red\">#{red}%</div>"
-           html+= "<div class=\"map-tip-blue\" style=\"width:#{data.blue_block_votes_pct}%\">#{blue}%</div>"
-           html+= "</div>"
-
-           return html
-
-           */
+          html += "<div class=\"map-tip-counted\">Optalt: " + counted + "%</div>";
+          html += data.name + "</h2>";
+          if (data.parties.length === 0) {
+            html += "<p>Afventer optælling fra kredsen.</p>";
+          } else {
+            html += "<table class=\"map-tip-table striped\">";
+            html += "<tbody>";
+            ref = data.parties;
+            for (j = 0,
+                   len = ref.length; j < len; j++) {
+              party = ref[j];
+              percent = $filter('number')(party.votes_pct, 1);
+              html += "<tr>";
+              html += "<td><i class=\"partylogo " + party.party_letter + "\"></i></td>";
+              html += "<td>" + party.party_name + "</td>";
+              html += "<td class=\"number\">" + percent + "%</td>";
+              html += "</tr>";
+            }
+            html += "</tbody>";
+            html += "</table>";
+          }
+          if (data.blue_block_votes_pct !== 0) {
+            html += "<div class=\"map-tip-block\">";
+            html += "<div class=\"map-tip-red\">" + red + "%</div>";
+            html += "<div class=\"map-tip-blue\" style=\"width:" + data.blue_block_votes_pct + "%\">" + blue + "%</div>";
+            html += "</div>";
+          }
 
           return html;
         });
@@ -76,55 +71,51 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
 
       var render = function(data){
 
-        /*
-         for constituency in data
-         mapId = constituency.ident.replace "K", "op-kreds-"
+        alert("test");
 
-         svg.select "##{mapId}"
-         .data [constituency]
-         .attr "class", (d) -> "map #{classes(d.block_winner, d.votes_counted_pct)}"
-         .on "mouseover", (d) ->
-         d3.select(this).attr "class", "map selected"
+        angular.forEach(data, function(constituency){
+          // match constituency.ident to map id eg. op-kreds- + XX
+          var mapId = "op-kreds-"+constituency.ident;
+          //var mapId = constituency.ident.replace("K", "op-kreds-");
 
-         tipDirection = ''
-         targetRect = this.getBBox()
-         parentRect = svg[0][0].getBBox();
+          svg.select("#" + mapId).data([constituency])
+            .attr("class", function(d) {
+              return "map " + (classes(d.winner, d.status_code));
+            })
+            .on("mouseover", function(d) {
+              var parentRect, targetRect, tipDirection;
+              d3.select(this).attr("class", "map selected");
+              tipDirection = '';
+              targetRect = this.getBBox();
+              parentRect = svg[0][0].getBBox();
+              if (targetRect.y > parentRect.height / 2) {
+                tipDirection = 'n';
+              } else {
+                tipDirection = 's';
+              }
+              if (targetRect.x > parentRect.width / 2) {
+                tipDirection += 'w';
+              } else {
+                tipDirection += 'e';
+              }
+              return tip.direction(tipDirection).show(d);
+            })
+            .on("mouseout", function(d) {
+              d3.select(this).attr("class", "map " + (classes(d.winner, d.status_code)));
+              return tip.hide();
+            })
+            .on("click", function(d) {
+              tip.destroy();
+              return scope.$apply(function() {
+                  return $location.path("resultater" + d.path);
+                });
+            });
 
-         if targetRect.y > parentRect.height / 2
-         tipDirection = 'n'
-         else
-         tipDirection = 's'
-         if targetRect.x > parentRect.width / 2
-         tipDirection += 'w'
-         else
-         tipDirection += 'e'
-         tip
-         .direction tipDirection
-         .show d
-         .on "mouseout", (d) ->
-         d3.select(this).attr "class", "map #{classes(d.block_winner, d.votes_counted_pct)}"
-         tip.hide()
-         .on "click", (d) ->
-         tip.destroy()
-         scope.$apply ->
-         $location.path "resultater#{d.path}"
-         */
+        });
 
       };
 
-      var update = function(data){
-        /*
-         update = (data) ->
-         mapId = data.ident.replace "K", "op-kreds-"
-         ele = d3.select "##{mapId}"
 
-         ele
-         .data [data]
-         .attr "class", "map updated"
-         .transition(2000).delay(200)
-         .attr "class", (d) -> "map #{classes(d.block_winner, d.votes_counted_pct)}"
-         */
-      };
 
       svg.call(tip);
 
@@ -133,10 +124,7 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
         if(data)
           render(data)
       });
-      scope.$watchCollection("json.map.newConstituency", function(data){
-        if(data)
-          update(data)
-      });
+
 
     }
 

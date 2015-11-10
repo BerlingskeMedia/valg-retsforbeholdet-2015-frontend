@@ -126,16 +126,16 @@ thead th {
 
 // Import pages SCSS
 @import "../scripts/pages/map/map";
-@import "../scripts/pages/party/party";
-@import "../scripts/pages/table/table";
-@import "../scripts/pages/teaser/teaser";
+//@import "../scripts/pages/party/party";
+//@import "../scripts/pages/table/table";
+//@import "../scripts/pages/teaser/teaser";
 
 // Import responsive SCSS
 @import "responsive";
 
 
 // Import logos SCSS
-@import "partylogos";
+//@import "partylogos";
 
 // Import ionicons
 @import "//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";

@@ -47,7 +47,7 @@ gulp.task('scripts', function () {
     .pipe(gulpif(!build, changed('.tmp')))
     .pipe(gulpif(!build, sourcemaps.init()))
     .pipe(concat('scripts.min.js'))
-    .pipe(ngannotate())
+    //.pipe(ngannotate())
    // .pipe(uglify())
     .pipe(gulpif(!build, sourcemaps.write()))
     .pipe(gulpif(build, header(banner, {pkg: pkg})))
@@ -121,7 +121,7 @@ gulp.task('watch', function () {
 gulp.task('connect', function () {
   connect.server({
     root: 'app',
-    port: 9000,
+    port: 9999,
     livereload: true
   });
 });

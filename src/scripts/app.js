@@ -1,4 +1,6 @@
 'use strict';
+//var apiIp = "//fv15api.bemit.dk";
+var apiIp = "//10.86.233.41:8081/fake";
 
 var app = angular.module ("ng-app", [
   "ngTouch",
@@ -6,6 +8,9 @@ var app = angular.module ("ng-app", [
   "templates"
 ])
   .config(['$httpProvider', '$compileProvider', '$routeProvider', function($httpProvider, $compileProvider, $routeProvider) {
+
+    $compileProvider.debugInfoEnabled(true);
+
     $routeProvider
       .when("/",{
         templateUrl: "map.html",
