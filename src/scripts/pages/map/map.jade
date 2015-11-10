@@ -38,15 +38,15 @@ div.mobile-container.mobile-show
   table.party-table.striped
     thead
       tr
-        th.mobile-show.party-logo Storkredse
+        th.mobile-show Storkredse
         th.number Status
         th.number Ja
         th.number Nej
     tbody
       tr(ng-repeat="constituency in json.map.locations")
-        td.party-logo
+        td
           a(ng-href="#/resultater/landet/{{constituency.path}}") {{constituency.name}}
-        td.number {{party.mandates}}
+        td.number {{constituency.status_text}}
         td.number {{constituency.results.JA.votes_pct | number}}%
         td.number {{constituency.results.NEJ.votes_pct | number}}%
   div
