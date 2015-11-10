@@ -7,21 +7,19 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
       var tip = d3.tip()
         .attr("class", "map-tip")
         .html(function(data){
-          var red = $filter('number')(data.red_block_votes_pct, 1);
-          var blue = $filter('number')(data.blue_block_votes_pct, 1);
+          var red = $filter('number')(data.results.JA.votes_pct, 1);
+          var blue = $filter('number')(data.results.NEJ.votes_pct, 1);
           var counted = $filter('number')(data.votes_counted_pct, 1);
 
           var html = "<h2 class=\"map-tip-header\">";
-          html += "<div class=\"map-tip-counted\">Optalt: " + counted + "%</div>";
           html += data.name + "</h2>";
-          if (data.parties.length === 0) {
+          if (!data.parties) {
             html += "<p>Afventer optælling fra kredsen.</p>";
           } else {
             html += "<table class=\"map-tip-table striped\">";
             html += "<tbody>";
             ref = data.parties;
-            for (j = 0,
-                   len = ref.length; j < len; j++) {
+            for (j = 0, len = ref.length; j < len; j++) {
               party = ref[j];
               percent = $filter('number')(party.votes_pct, 1);
               html += "<tr>";
@@ -70,8 +68,6 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
       };
 
       var render = function(data){
-
-        alert("test");
 
         angular.forEach(data, function(constituency){
           // match constituency.ident to map id eg. op-kreds- + XX

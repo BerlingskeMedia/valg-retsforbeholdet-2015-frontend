@@ -38,39 +38,15 @@ div.mobile-container.mobile-show
   table.party-table.striped
     thead
       tr
-        th.mobile-show.party-logo Parti
-        th.number Stemmetal
-        th.number Procenter
-        th.number Mandater
+        th.mobile-show.party-logo Storkredse
+        th.number Status
+        th.number Ja
+        th.number Nej
     tbody
-      tr(ng-repeat="party in json.map.parties")
-        td.party-logo 
-          a(ng-href="#/resultater/landet/{{party.party_letter}}")
-            i.partylogo.large(ng-class="party.party_letter")
-        td.number {{party.votes | number}}
-        td.number {{party.votes_pct | number}}%
+      tr(ng-repeat="constituency in json.map.locations")
+        td.party-logo
+          a(ng-href="#/resultater/landet/{{constituency.path}}") {{constituency.name}}
         td.number {{party.mandates}}
+        td.number {{constituency.results.JA.votes_pct | number}}%
+        td.number {{constituency.results.NEJ.votes_pct | number}}%
   div
-    strong Storkredse
-    ul.constituency-nav
-      li.constituency
-        a.ng-binding(href='#/resultater/storkreds/S4') Bornholms Storkreds
-      li.constituency
-        a.ng-binding(href='#/resultater/storkreds/S6') Fyns Storkreds
-      li.constituency
-        a.ng-binding(href='#/resultater/storkreds/S2') K&oslash;benhavns Omegns Storkreds
-      li.constituency
-        a.ng-binding(href='#/resultater/storkreds/S1') K&oslash;benhavns Storkreds
-      li.constituency
-        a.ng-binding(href='#/resultater/storkreds/S10') Nordjyllands Storkreds
-      li.constituency
-        a.ng-binding(href='#/resultater/storkreds/S3') Nordsj&aelig;llands Storkreds
-      li.constituency
-        a.ng-binding(href='#/resultater/storkreds/S5') Sj&aelig;llands Storkreds
-      li.constituency
-        a.ng-binding(href='#/resultater/storkreds/S7') Sydjyllands Storkreds
-      li.constituency
-        a.ng-binding(href='#/resultater/storkreds/S9') Vestjyllands Storkreds
-      li.constituency
-        a.ng-binding(href='#/resultater/storkreds/S8') &Oslash;stjyllands Storkreds
-    .clearfix
