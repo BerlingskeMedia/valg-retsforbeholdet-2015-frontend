@@ -32,9 +32,18 @@ app.controller("MapController", ["$scope", "$http", "$timeout", function($scope,
         doubleClickCheck = false
       }, 500);
     }
+  };
 
+  $scope.changeOrder = function(order) {
+    if ($scope.order === order) {
+      return $scope.reverse = !$scope.reverse;
+    } else {
+      $scope.order = order;
+      return $scope.reverse = false;
+    }
 
   };
+
 
   $http.get(apiIp+"/map").then(function(data){
     if(data.data) {

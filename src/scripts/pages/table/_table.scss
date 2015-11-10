@@ -1,0 +1,83 @@
+.overview-table {
+  td {
+    background-color: $white;
+    &:nth-child(even) {
+      text-align: right;
+      border-right: 2px solid $grey;
+    }
+    &:nth-child(odd) {
+      font-weight: 600;
+    }
+  }
+}
+
+.party-table {
+  td {
+    &:first-child {
+      width: 40px;
+    }
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+.constituency-nav {
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+}
+
+.constituency {
+  float: left;
+  background-color: $primary;
+  margin: 5px 10px 5px 0;
+  padding: 8px 12px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primary-light;
+  }
+
+  a {
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+.ion-minus {
+  width: 15.75px;
+  color: $dark-grey;
+  display: inline-block;
+}
+
+.info-popup-container {
+  position: relative;
+}
+
+.info-popup {
+  position: absolute;
+  top: 35px;
+  right: -12px;
+  z-index: 10;
+  background-color: $dark-grey;
+  color: $black;
+  text-align: left;
+  padding: .5em;
+  font-size: .8em;
+  width: 245px;
+}
+
+@media (max-width: 800px) {
+  .overview-table {
+    td {
+      float: left;
+      width: 50%;
+      box-sizing: border-box;
+      border: none;
+      border-bottom: 2px solid $grey;
+    }
+  }
+}

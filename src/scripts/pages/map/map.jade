@@ -38,12 +38,12 @@ div.mobile-container.mobile-show
   table.party-table.striped
     thead
       tr
-        th.mobile-show Storkredse
-        th.number Status
-        th.number Ja
-        th.number Nej
+        th.mobile-show(ng-click="changeOrder('name')") Storkredse
+        th.number(ng-click="changeOrder('status_text')") Status
+        th.number(ng-click="changeOrder('-votes_pct')") Ja
+        th.number(ng-click="changeOrder('-votes_pct')") Nej
     tbody
-      tr(ng-repeat="constituency in json.map.locations")
+      tr(ng-repeat="constituency in json.map.locations | orderBy:order:reverse")
         td
           a(ng-href="#/resultater/landet/{{constituency.path}}") {{constituency.name}}
         td.number {{constituency.status_text}}
