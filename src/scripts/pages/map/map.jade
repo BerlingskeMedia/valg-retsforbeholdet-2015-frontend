@@ -33,10 +33,19 @@ div.mobile-container.mobile-show
   table.party-table.striped
     thead
       tr
-        th.mobile-show(ng-click="changeOrder('name')") Storkredse
-        th.number(ng-click="changeOrder('status_text')") Status
-        th.number(ng-click="changeOrder('-votes_pct')") Ja
-        th.number(ng-click="changeOrder('-votes_pct')") Nej
+        th.mobile-show(ng-click="changeOrder('name')")
+          | Storkredse
+          i(ng-class="{'ion-android-arrow-dropup': order=='-name' && reverse==true, 'ion-android-arrow-dropdown': order=='-name' && reverse==false}")
+        th.number(ng-click="changeOrder('-status_text')")
+          | Status
+          i(ng-class="{'ion-android-arrow-dropup': order=='-status_text' && reverse==true, 'ion-android-arrow-dropdown': order=='-status_text' && reverse==false}")
+        th.number(ng-click="changeOrder('-results.JA.votes_pct')")
+          | Ja
+          i(ng-class="{'ion-android-arrow-dropup': order=='-results.JA.votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-results.JA.votes_pct' && reverse==false}")
+        th.number(ng-click="changeOrder('-results.NEJ.votes_pct')")
+          | Nej
+          i(ng-class="{'ion-android-arrow-dropup': order=='-results.NEJ.votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-results.NEJ.votes_pct' && reverse==false}")
+
     tbody
       tr(ng-repeat="constituency in json.map.locations | orderBy:order:reverse")
         td
