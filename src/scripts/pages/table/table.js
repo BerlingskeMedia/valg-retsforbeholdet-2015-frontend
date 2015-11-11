@@ -20,7 +20,7 @@ app.controller("TableController", ["$scope", "$http", "$routeParams", "tracker",
 
   };
 
-  $http.get(apiIp + "/map").success(function(data) {
+  $http.get(apiIp + "/" + apiUrl).success(function(data) {
       return $scope.json.table = data;
     }
   ).error(function(data, status, headers, config) {

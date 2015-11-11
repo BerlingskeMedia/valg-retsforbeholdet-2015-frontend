@@ -9,12 +9,12 @@ div.table-container
   table.overview-table
     tr
       td Senest opdateret:
-      td {{json.table.result_time}}
+      td {{json.table.updated_at}}
       td Stemmeberettigede:
       td.number {{json.table.votes_allowed | number}}
     tr
       td Procent optalt:
-      td.number {{json.table.votes_counted_pct | number}}%
+      td.number {{(json.table.votes_made/json.table.votes_allowed)*100 | number}}%
       td Stemmeprocent:
       td.number {{json.table.votes_pct | number}}%
     tr
@@ -29,14 +29,14 @@ div.table-container
   table.party-table.striped
     thead
       tr
-       th(ng-click="changeOrder('party_name')")
+       th(ng-click="changeOrder('-name')")
           strong(ng-if="json.table.areatype == 'L'") Storkredse
           strong(ng-if="json.table.areatype == 'S'") Kredse i {{json.table.name}}
           strong(ng-if="json.table.areatype == 'K'") Valgsteder i {{json.table.name}}
-          i(ng-class="{'ion-android-arrow-dropup': order=='name' && reverse==false, 'ion-android-arrow-dropdown': order=='name' && reverse==true}")
-        th.number(ng-click="changeOrder('-status_text')")
+          i(ng-class="{'ion-android-arrow-dropup': order=='-name' && reverse==false, 'ion-android-arrow-dropdown': order=='-name' && reverse==true}")
+        th.number(ng-click="changeOrder('-votes_made')")
           | Stemmetal&nbsp;
-          i(ng-class="{'ion-android-arrow-dropup': order=='-status_text' && reverse==true, 'ion-android-arrow-dropdown': order=='-status_text' && reverse==false}")
+          i(ng-class="{'ion-android-arrow-dropup': order=='-votes_made' && reverse==true, 'ion-android-arrow-dropdown': order=='-votes_made' && reverse==false}")
         th.number(ng-click="changeOrder('-results.JA.votes_pct')")
           | Ja&nbsp;
           i(ng-class="{'ion-android-arrow-dropup': order=='-results.JA.votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-results.JA.votes_pct' && reverse==false}")
@@ -54,8 +54,8 @@ div.table-container
           span(ng-if="json.table.areatype == 'D'") valgstedet.
       tr(ng-repeat="constituency in json.table.locations | orderBy:order:reverse")
         td
-          a(ng-href="#/{{constituency.path}}") {{constituency.name}}
-        td.number {{constituency.status_text | number}}
+          a(ng-href="#/resultater{{constituency.path}}") {{constituency.name}}
+        td.number {{(constituency.votes_made || (constituency.results.JA.votes + constituency.results.JA.votes)) | number}}
         td.number {{constituency.results.JA.votes_pct | number}}%
         td.number {{constituency.results.NEJ.votes_pct | number}}%
   div
