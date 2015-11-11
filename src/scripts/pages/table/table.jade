@@ -1,6 +1,6 @@
 ul.breadcrumbs
   li.breadcrumb
-    a(ng-href="#/map") Folketingsvalg 2015
+    a(ng-href="#/map") Restsforbeholdsvalg 2015
   li.breadcrumb(ng-repeat="hier in json.table.hierarchy")
     a(ng-href="#/resultater{{hier.path}}") {{hier.name}}
 .clearfix
@@ -9,7 +9,7 @@ div.table-container
   table.overview-table
     tr
       td Senest opdateret:
-      td {{json.table.updated_at}}
+      td {{json.table.result_time}}
       td Stemmeberettigede:
       td.number {{json.table.votes_allowed | number}}
     tr
@@ -29,52 +29,34 @@ div.table-container
   table.party-table.striped
     thead
       tr
-        th.mobile-hide(colspan="2" ng-click="changeOrder('party_name')") 
-          | Parti&nbsp;
-          i(ng-class="{'ion-android-arrow-dropup': order=='party_name' && reverse==false, 'ion-android-arrow-dropdown': order=='party_name' && reverse==true}")
-        th.mobile-show(ng-click="changeOrder('party_name')") 
-          | Parti
-          i(ng-class="{'ion-android-arrow-dropup': order=='party_name' && reverse==false, 'ion-android-arrow-dropdown': order=='party_name' && reverse==true}")
-        th.number(ng-click="changeOrder('-votes')") 
+       th.mobile-show(ng-click="changeOrder('party_name')")
+          strong(ng-if="json.table.areatype == 'L'") Storkredse
+          strong(ng-if="json.table.areatype == 'S'") Kredse i {{json.table.name}}
+          strong(ng-if="json.table.areatype == 'K'") Valgsteder i {{json.table.name}}
+          i(ng-class="{'ion-android-arrow-dropup': order=='name' && reverse==false, 'ion-android-arrow-dropdown': order=='name' && reverse==true}")
+        th.number(ng-click="changeOrder('-votes')")
           | Stemmetal&nbsp;
-          i(ng-class="{'ion-android-arrow-dropup': order=='-votes' && reverse==true, 'ion-android-arrow-dropdown': order=='-votes' && reverse==false}")
-        th.number(ng-click="changeOrder('-votes_pct')") 
-          | Procenter&nbsp;
           i(ng-class="{'ion-android-arrow-dropup': order=='-votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-votes_pct' && reverse==false}")
-        th.number.mobile-hide 
-          | Procenter +/-
-          i.ion-information-circled.info-popup-container(ng-mouseover="infoPct = true" ng-mouseout="infoPct = false")
-            span.info-popup(ng-show="infoPct") Tallet viser, hvor mange procentpoint partiet er gået frem eller tilbage i forhold til folketingsvalget 2011.
-        th.number(ng-if="json.table.areatype != 'K' && json.table.areatype != 'D'" ng-click="changeOrder('-mandates')") 
-          | Mandater&nbsp;
-          i(ng-class="{'ion-android-arrow-dropup': order=='-mandates' && reverse==true, 'ion-android-arrow-dropdown': order=='-mandates' && reverse==false}")
-        th.number.mobile-hide(ng-if="json.table.areatype != 'K' && json.table.areatype != 'D'") 
-          | Mandater +/- 
-          i.ion-information-circled.info-popup-container(ng-mouseover="infoMan = true" ng-mouseout="infoMan = false")
-            span.info-popup(ng-show="infoMan") Tallet viser, hvor mange mandater partiet er gået frem eller tilbage i forhold til folketingsvalget 2011.
+        th.number(ng-click="changeOrder('-votes_pct')")
+          | Ja&nbsp;
+          i(ng-class="{'ion-android-arrow-dropup': order=='-votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-votes_pct' && reverse==false}")
+        th.number(ng-click="changeOrder('-votes_pct')")
+          | Nej&nbsp;
+          i(ng-class="{'ion-android-arrow-dropup': order=='-votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-votes_pct' && reverse==false}")
+
     tbody
       tr
-        td(colspan="7" ng-if="json.table.results.length == 0") 
+        td(colspan="7" ng-if="json.table.results.length == 0")
           | Afventer optælling fra&nbsp;
           span(ng-if="json.table.areatype == 'L'") landet.
           span(ng-if="json.table.areatype == 'S'") storkredsen.
           span(ng-if="json.table.areatype == 'K'") kredsen.
           span(ng-if="json.table.areatype == 'D'") valgstedet.
-      tr(ng-repeat="party in json.table.results | orderBy:order:reverse")
-        td.party-logo
-          a(ng-href="#/resultater{{party.path}}") #[i.partylogo.large(ng-class="party.party_letter")]
-        td.mobile-hide
-          a(ng-href="#/resultater{{party.path}}") {{party.party_name}}
-        td.number {{party.votes | number}}
-        td.number {{party.votes_pct | number}}%
-        td.number.mobile-hide ({{party.votes_deviation | number}}%) #[i(ng-class="{'ion-chevron-up positive' : party.votes_deviation > 0, 'ion-chevron-down negative' : party.votes_deviation < 0, 'ion-minus' : party.votes_deviation == 0}")]
-        td.number(ng-if="json.table.areatype != 'K' && json.table.areatype != 'D'") {{party.mandates | number}}
-        td.number.mobile-hide(ng-if="json.table.areatype != 'K' && json.table.areatype != 'D'") ({{party.mandates_deviation | number}}) #[i(ng-class="{'ion-chevron-up positive' : party.mandates_deviation > 0, 'ion-chevron-down negative' : party.mandates_deviation < 0, 'ion-minus' : party.mandates_deviation == 0}")]
+      tr(ng-repeat="constituency in json.table.locations | orderBy:order:reverse")
+        td
+          a(ng-href="#/{{constituency.path}}") {{constituency.name}}
+        td.number {{constituency.status_text | number}}
+        td.number {{constituency.results.JA.votes_pct | number}}%
+        td.number {{constituency.results.NEJ.votes_pct | number}}%
   div
-    strong(ng-if="json.table.areatype == 'L'") Storkredse
-    strong(ng-if="json.table.areatype == 'S'") Kredse i {{json.table.name}}
-    strong(ng-if="json.table.areatype == 'K'") Valgsteder i {{json.table.name}}
-    ul.constituency-nav
-      li.constituency(ng-repeat="location in json.table.locations")
-        a(ng-href="#/resultater{{location.path}}") {{location.name}}
-    .clearfix
+

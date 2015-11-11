@@ -45,7 +45,7 @@ div.mobile-container.mobile-show
     tbody
       tr(ng-repeat="constituency in json.map.locations | orderBy:order:reverse")
         td
-          a(ng-href="#/resultater/landet/{{constituency.path}}") {{constituency.name}}
+          a(ng-href="#/resultater{{constituency.path}}") {{constituency.name}}
         td.number {{constituency.status_text}}
         td.number {{constituency.results.JA.votes_pct | number}}%
         td.number {{constituency.results.NEJ.votes_pct | number}}%
