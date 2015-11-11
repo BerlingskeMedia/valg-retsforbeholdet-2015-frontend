@@ -111,10 +111,7 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
 
       };
 
-
-
       svg.call(tip);
-
 
       scope.$watchCollection("json.map.constituencies", function(data){
         if(data)
