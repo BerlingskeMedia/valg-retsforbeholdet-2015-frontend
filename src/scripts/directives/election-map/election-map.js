@@ -9,32 +9,42 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
         .html(function(data){
           var red = $filter('number')(data.results.JA.votes_pct, 1);
           var blue = $filter('number')(data.results.NEJ.votes_pct, 1);
-          var counted = $filter('number')(data.votes_counted_pct, 1);
+          var counted = $filter('number')(data.votes_pct, 1);
 
           var html = "<h2 class=\"map-tip-header\">";
           html += data.name + "</h2>";
-          if (!data.parties) {
+          if (data.status_code === 0) {
             html += "<p>Afventer optælling fra kredsen.</p>";
           } else {
             html += "<table class=\"map-tip-table striped\">";
             html += "<tbody>";
-            ref = data.parties;
-            for (j = 0, len = ref.length; j < len; j++) {
-              party = ref[j];
-              percent = $filter('number')(party.votes_pct, 1);
-              html += "<tr>";
-              html += "<td><i class=\"partylogo " + party.party_letter + "\"></i></td>";
-              html += "<td>" + party.party_name + "</td>";
-              html += "<td class=\"number\">" + percent + "%</td>";
-              html += "</tr>";
-            }
+            html += "<tr>";
+            html += "<td>Stemmeberettigede</i></td>";
+            html += "<td class=\"number\">"+data.votes_allowed+"</td>";
+            html += "</tr>";
+            html += "<tr>";
+            html += "<td>Ja-stemmer</i></td>";
+            html += "<td class=\"number\">"+data.results.JA.votes+"</td>";
+            html += "</tr>";
+            html += "<tr>";
+            html += "<td>Nej-stemmer</i></td>";
+            html += "<td class=\"number\">"+data.results.NEJ.votes+"</td>";
+            html += "</tr>";
+            html += "<tr>";
+            html += "<td>Ugyldige stemmer</i></td>";
+            html += "<td class=\"number\">"+data.votes_invalid_total+"</td>";
+            html += "</tr>";
+            html += "<tr>";
+            html += "<td>Blanke stemmer</i></td>";
+            html += "<td class=\"number\">"+data.votes_invalid_blank+"</td>";
+            html += "</tr>";
             html += "</tbody>";
             html += "</table>";
           }
           if (data.blue_block_votes_pct !== 0) {
             html += "<div class=\"map-tip-block\">";
             html += "<div class=\"map-tip-red\">" + red + "%</div>";
-            html += "<div class=\"map-tip-blue\" style=\"width:" + data.blue_block_votes_pct + "%\">" + blue + "%</div>";
+            html += "<div class=\"map-tip-blue\" style=\"width:" + data.results.NEJ.votes_pct + "%\">" + blue + "%</div>";
             html += "</div>";
           }
 

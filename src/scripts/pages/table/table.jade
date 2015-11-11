@@ -14,7 +14,7 @@ div.table-container
       td.number {{json.table.votes_allowed | number}}
     tr
       td Procent optalt:
-      td.number {{(json.table.votes_made/json.table.votes_allowed)*100 | number}}%
+      td.number {{((json.table.votes_made/json.table.votes_allowed)*100).toFixed(1) | number}}%
       td Stemmeprocent:
       td.number {{json.table.votes_pct | number}}%
     tr

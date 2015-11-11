@@ -8,6 +8,7 @@ $lighter-red: lighten($red, 40);
 $blue: #136A90;
 $light-blue: lighten($blue, 20);
 $lighter-blue: lighten($blue, 40);
+$neutral: #aaa;
 
 [ng-app] {
   font-family: $main-font;

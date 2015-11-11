@@ -1,6 +1,6 @@
 div.tab-container
   ul.tab-header
-    li.tab-nav.active(ng-click="tab='2011'") Optalte stemmer {{json.map.votes_counted_pct | number}}%
+    li.tab-nav.active(ng-click="tab='2011'") Optalte kredse {{json.map.constituencies.length | number}} af 92
   .clearfix
   div.tab-body(ng-click="toggleshowPer()" ng-if="detectmobile()")
     div.block-poll(block-poll)
@@ -10,7 +10,7 @@ div.tab-container
   div.map-container.mobile-hide
     div.election-map(election-map)
     div.help-box
-      p Farven angiver hvilken blok der fører i kredsen:
+      p Farven angiver hvilket resultat der fører i kredsen:
       div.color-block
         div.block.red
         div.block.blue
@@ -18,11 +18,11 @@ div.tab-container
       div.color-block
         div.block.light-red
         div.block.light-blue
-        p.block-text Flere valgsteder i kredsen optalt
+        p.block-text Afventer fintælling af valgsteder
       div.color-block
-        div.block.lighter-red
-        div.block.lighter-blue
-        p.block-text Få valgsteder i kredsen optalt
+        div.block.neutral
+        div.block.neutral
+        p.block-text Kredsen er endnu ikke optalt
   ul.latest-updates.mobile-hide(ng-hide="json.map.latest_votes_counted_complete.length == 0")
     li.updated-text Seneste optalte:
     li.updated-region(ng-repeat="latest in json.map.latest_votes_counted_complete track by $index")
