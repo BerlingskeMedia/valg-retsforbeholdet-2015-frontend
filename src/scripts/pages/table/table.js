@@ -1,4 +1,4 @@
-app.controller("TableController", ["$scope", "$http", "$routeParams",  function($scope, $http, $routeParams) {
+app.controller("TableController", ["$scope", "$http", "$routeParams", "tracker",  function($scope, $http, $routeParams, tracker) {
 
   var apiUrl;
   apiUrl = $routeParams.path;
@@ -27,5 +27,7 @@ app.controller("TableController", ["$scope", "$http", "$routeParams",  function(
       return alert("Der var et problem med at skabe kontakt til vores server, prøv igen senere.");
     }
   );
+
+  tracker.track();
 
 }]);

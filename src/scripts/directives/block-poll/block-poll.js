@@ -118,7 +118,7 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
         }
       });
 
-      /*scope.$watch("showPer", function(data){
+      scope.$watch("showPer", function(data){
         if(data === false) {
 
           redBlockValue.text(function(d){
@@ -138,7 +138,7 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
             return d.votes_pct+"%";
           });
         }
-      });*/
+      });
 
     }
   }

@@ -1,5 +1,5 @@
 
-app.controller("MapController", ["$scope", "$http", "$timeout", function($scope, $http, $timeout){
+app.controller("MapController", ["$scope", "$http", "$timeout", "tracker", function($scope, $http, $timeout, tracker){
 
   var doubleClickCheck = false;
   var enableMouseover = false;
@@ -56,7 +56,8 @@ app.controller("MapController", ["$scope", "$http", "$timeout", function($scope,
   }, function(data, status, headers, config){
     alert("Der var et problem med at skabe kontakt til vores server, prøv igen senere.");
 
-  })
+  });
 
+  tracker.track();
 
 }]);
