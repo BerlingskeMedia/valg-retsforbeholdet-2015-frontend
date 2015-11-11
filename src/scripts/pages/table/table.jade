@@ -29,20 +29,20 @@ div.table-container
   table.party-table.striped
     thead
       tr
-       th.mobile-show(ng-click="changeOrder('party_name')")
+       th(ng-click="changeOrder('party_name')")
           strong(ng-if="json.table.areatype == 'L'") Storkredse
           strong(ng-if="json.table.areatype == 'S'") Kredse i {{json.table.name}}
           strong(ng-if="json.table.areatype == 'K'") Valgsteder i {{json.table.name}}
           i(ng-class="{'ion-android-arrow-dropup': order=='name' && reverse==false, 'ion-android-arrow-dropdown': order=='name' && reverse==true}")
-        th.number(ng-click="changeOrder('-votes')")
+        th.number(ng-click="changeOrder('-status_text')")
           | Stemmetal&nbsp;
-          i(ng-class="{'ion-android-arrow-dropup': order=='-votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-votes_pct' && reverse==false}")
-        th.number(ng-click="changeOrder('-votes_pct')")
+          i(ng-class="{'ion-android-arrow-dropup': order=='-status_text' && reverse==true, 'ion-android-arrow-dropdown': order=='-status_text' && reverse==false}")
+        th.number(ng-click="changeOrder('-results.JA.votes_pct')")
           | Ja&nbsp;
-          i(ng-class="{'ion-android-arrow-dropup': order=='-votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-votes_pct' && reverse==false}")
+          i(ng-class="{'ion-android-arrow-dropup': order=='-results.JA.votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-results.JA.votes_pct' && reverse==false}")
         th.number(ng-click="changeOrder('-votes_pct')")
           | Nej&nbsp;
-          i(ng-class="{'ion-android-arrow-dropup': order=='-votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-votes_pct' && reverse==false}")
+          i(ng-class="{'ion-android-arrow-dropup': order=='-results.NEJ.votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-results.NEJ.votes_pct' && reverse==false}")
 
     tbody
       tr
