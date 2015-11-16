@@ -12,7 +12,7 @@ div.table-container
   table.overview-table
     tr
       td Senest opdateret:
-      td {{json.table.updated_at}}
+      td {{json.table.result_time}}
       td Stemmeberettigede:
       td.number {{json.table.votes_allowed | number}}
     tr
@@ -30,7 +30,7 @@ div.table-container
       td Optalte stemmer:
       td.number {{json.table.votes_made | number}}
 
-  table.party-table.striped
+  table.party-table.striped(ng-if="json.table.areatype != 'D'")
     thead
       tr
        th(ng-click="changeOrder('-name')")

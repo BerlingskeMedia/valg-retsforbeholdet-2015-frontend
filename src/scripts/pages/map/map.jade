@@ -1,6 +1,8 @@
 div.tab-container
   ul.tab-header
-    li.tab-nav.active(ng-click="tab='2011'") Optalte kredse {{json.map.constituencies.length | number}} af 92
+    li.tab-nav.active(ng-click="tab='2011'", ng-show="json.map.status_code === 1") Afventer fintælling i kredse
+    li.tab-nav.active(ng-click="tab='2011'", ng-show="json.map.status_code === 0") Afventer optælling
+    li.tab-nav.active(ng-click="tab='2011'", ng-show="json.map.status_code === 12") Alle stemmer er optalt
   .clearfix
   div.tab-body(ng-click="toggleshowPer()" ng-if="detectmobile()")
     div.block-poll(block-poll)
@@ -33,12 +35,12 @@ div.mobile-container.mobile-show
   table.party-table.striped
     thead
       tr
-        th.mobile-show(ng-click="changeOrder('name')")
+        th.mobile-show(ng-click="changeOrder('-name')")
           | Storkredse
           i(ng-class="{'ion-android-arrow-dropup': order=='-name' && reverse==true, 'ion-android-arrow-dropdown': order=='-name' && reverse==false}")
-        th.number(ng-click="changeOrder('-status_text')")
-          | Status
-          i(ng-class="{'ion-android-arrow-dropup': order=='-status_text' && reverse==true, 'ion-android-arrow-dropdown': order=='-status_text' && reverse==false}")
+        th.number(ng-click="changeOrder('-votes_made')")
+          | Stemmetal
+          i(ng-class="{'ion-android-arrow-dropup': order=='-votes_made' && reverse==true, 'ion-android-arrow-dropdown': order=='-votes_made' && reverse==false}")
         th.number(ng-click="changeOrder('-results.JA.votes_pct')")
           | Ja
           i(ng-class="{'ion-android-arrow-dropup': order=='-results.JA.votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-results.JA.votes_pct' && reverse==false}")
@@ -50,7 +52,7 @@ div.mobile-container.mobile-show
       tr(ng-repeat="constituency in json.map.constituencies | orderBy:order:reverse")
         td
           a(ng-href="#/resultater{{constituency.path}}") {{constituency.name}}
-        td.number {{constituency.status_text}}
+        td.number {{constituency.votes_made}}
         td.number {{constituency.results.JA.votes_pct | number}}%
         td.number {{constituency.results.NEJ.votes_pct | number}}%
   div

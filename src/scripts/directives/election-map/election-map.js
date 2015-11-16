@@ -12,6 +12,11 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
           var counted = $filter('number')(data.votes_pct, 1);
 
           var html = "<h2 class=\"map-tip-header\">";
+          if(data.status_code === 12){
+            html+= "<div class=\"map-tip-counted\">Alle stemmer optalt</div>";
+          }else if(data.status_code === 1){
+            html+= "<div class=\"map-tip-counted\">Afventer fintælling</div>";
+          }
           html += data.name + "</h2>";
           if (data.status_code === 0) {
             html += "<p>Afventer optælling fra kredsen.</p>";
@@ -57,17 +62,17 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
         if(block === "JA"){
           if(statuscode === 12) {
             return "red";
-          }else if(statuscode){
+          }else if(statuscode === 1){
             return "light-red";
           }else{
             return "neutral";
           }
 
-        }else if(block === "Nej"){
+        }else if(block === "NEJ"){
 
           if(statuscode === 12) {
             return "blue";
-          }else if(statuscode){
+          }else if(statuscode === 1){
             return "light-blue";
           }else{
             return "neutral";
