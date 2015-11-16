@@ -47,7 +47,7 @@ div.mobile-container.mobile-show
           i(ng-class="{'ion-android-arrow-dropup': order=='-results.NEJ.votes_pct' && reverse==true, 'ion-android-arrow-dropdown': order=='-results.NEJ.votes_pct' && reverse==false}")
 
     tbody
-      tr(ng-repeat="constituency in json.map.locations | orderBy:order:reverse")
+      tr(ng-repeat="constituency in json.map.constituencies | orderBy:order:reverse")
         td
           a(ng-href="#/resultater{{constituency.path}}") {{constituency.name}}
         td.number {{constituency.status_text}}

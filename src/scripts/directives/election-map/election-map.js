@@ -53,28 +53,28 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
 
       // function for setting map color-classes depending on poll results
       // todo: setup correct color mapping classes for map view (not red/blue)
-      var classes = function (block, pct){
+      var classes = function (block, statuscode){
         if(block === "JA"){
-
-          return "red";
-          /*
-           return "red" if pct >= 99.9
-           return "light-red" if pct >= 50
-           return "lighter-red"
-           */
+          if(statuscode === 12) {
+            return "red";
+          }else if(statuscode){
+            return "light-red";
+          }else{
+            return "neutral";
+          }
 
         }else if(block === "Nej"){
 
-          return "blue";
-          /*
-           return "blue" if pct >= 99.9
-           return "light-blue" if pct >= 50
-           return "lighter-blue"
-           */
+          if(statuscode === 12) {
+            return "blue";
+          }else if(statuscode){
+            return "light-blue";
+          }else{
+            return "neutral";
+          }
         }else{
           return "neutral";
         }
-
       };
 
       var render = function(data){

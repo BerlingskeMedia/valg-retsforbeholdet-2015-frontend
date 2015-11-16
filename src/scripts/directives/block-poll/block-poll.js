@@ -38,13 +38,13 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
         redBlockValue = svg.selectAll(".red.block-value").data([data.results.JA]);
         redBlockValue.enter().append("text").attr("class", "red block-value").attr("x", 10).attr("y", 38).attr("text-anchor", "start");
         redBlockValue.text(function(d) {
-            return ($filter('number')(d.votes_pct)) + "%";
+            return "JA";
           }
         );
         redBlockLetters = svg.selectAll(".red.block-letters").data([data.results.JA]);
         redBlockLetters.enter().append("text").attr("class", "red block-letters").attr("y", 38).attr("text-anchor", "end");
         redBlockLetters.text(function(d) {
-            return d.party_letters;
+            return ($filter('number')(d.votes_pct)) + "%";
           }
         ).transition().duration(1000).attr("x", function(d) {
             return xScale(d.votes_pct) - 10;
@@ -70,13 +70,13 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
         blueBlockValue = svg.selectAll(".blue.block-value").data([data.results.NEJ]);
         blueBlockValue.enter().append("text").attr("class", "blue block-value").attr("x", svgWidth - 10).attr("y", 38).attr("text-anchor", "end");
         blueBlockValue.text(function(d) {
-            return ($filter('number')(d.votes_pct)) + "%";
+            return "NEJ";
           }
         );
         blueBlockLetters = svg.selectAll(".blue.block-letters").data([data.results.NEJ]);
         blueBlockLetters.enter().append("text").attr("class", "blue block-letters").attr("y", 38).attr("text-anchor", "start");
         blueBlockLetters.text(function(d) {
-            return d.party_letters;
+            return ($filter('number')(d.votes_pct)) + "%";
           }
         ).transition().duration(1000).attr("x", function(d) {
             return svgWidth - xScale(d.votes_pct) + 10;
@@ -86,11 +86,11 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
           redBlockLetters.attr("display", "none");
           blueBlockLetters.attr("display", "none");
           redBlockValue.text(function(d) {
-              return ($filter('number')(d.votes_pct)) + "%";
+              return "JA";
             }
           );
           return blueBlockValue.text(function(d) {
-              return ($filter('number')(d.votes_pct)) + "%";
+              return "NEJ";
             }
           );
         }
@@ -119,7 +119,7 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
       });
 
       scope.$watch("showPer", function(data){
-        if(data === false) {
+/*        if(data === false) {
 
           redBlockValue.text(function(d){
             return "JA";
@@ -137,7 +137,7 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
           blueBlockValue.text(function(d) {
             return d.votes_pct+"%";
           });
-        }
+        }*/
       });
 
     }

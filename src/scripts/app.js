@@ -1,6 +1,7 @@
 'use strict';
 //var apiIp = "//fv15api.bemit.dk";
-var apiIp = "//10.86.233.41:8081/fake";
+//var apiIp = "//10.86.233.41:8081/fake";
+var apiIp = "//10.86.233.41:8081";
 
 var app = angular.module ("ng-app", [
   "ngTouch",

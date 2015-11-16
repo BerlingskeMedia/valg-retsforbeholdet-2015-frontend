@@ -1,14 +1,14 @@
 $grey: #eee;
 $dark-grey: #d5d5d5;
-$red: #BB242E;
+$red: #F96F00;
 $black: #666;
 $white: #FFF;
-$light-red: lighten($red, 20);
+$light-red: rgba(249,111,0, 0.5);
 $lighter-red: lighten($red, 40);
-$blue: #136A90;
-$light-blue: lighten($blue, 20);
+$blue: #152C34;
+$light-blue: rgba(21,44,52, 0.5);
 $lighter-blue: lighten($blue, 40);
-$neutral: #aaa;
+$neutral: rgba(170,170,170,0.5);
 
 [ng-app] {
   font-family: $main-font;
