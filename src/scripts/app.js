@@ -6,7 +6,8 @@ var apiIp = "//10.86.233.41:8081";
 var app = angular.module ("ng-app", [
   "ngTouch",
   "ngRoute",
-  "templates"
+  "templates",
+  "n3-pie-chart"
 ])
   .config(['$httpProvider', '$compileProvider', '$routeProvider', function($httpProvider, $compileProvider, $routeProvider) {
 

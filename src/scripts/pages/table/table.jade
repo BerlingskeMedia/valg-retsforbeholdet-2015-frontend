@@ -6,6 +6,9 @@ ul.breadcrumbs
 .clearfix
 div.table-container
   h1.app-header {{json.table.name}}
+  div.pie
+    pie-chart(data="[{label: 'JA', value: json.table.results.JA.votes_pct, color: '#F96F00'},{label:'NEJ', value: json.table.results.NEJ.votes_pct, color: '#152C34'}]", options="{thickness: 35}")
+
   table.overview-table
     tr
       td Senest opdateret:
@@ -26,6 +29,7 @@ div.table-container
       td(ng-if="json.table.areatype != 'D'") {{json.table.locations_completed}} af {{json.table.locations_total}}
       td Optalte stemmer:
       td.number {{json.table.votes_made | number}}
+
   table.party-table.striped
     thead
       tr

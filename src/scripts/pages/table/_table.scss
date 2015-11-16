@@ -1,4 +1,12 @@
+.pie{
+  float: right;
+  width: 30%;
+  text-align: center;
+  margin: 2em 0;
+}
+
 .overview-table {
+  width: 70%;
   td {
     background-color: $white;
     &:nth-child(even) {
@@ -71,7 +79,13 @@
 }
 
 @media (max-width: 800px) {
+  .pie{
+    float: none;
+    width:  100%
+  }
   .overview-table {
+    width: 100%;
+
     td {
       float: left;
       width: 50%;
