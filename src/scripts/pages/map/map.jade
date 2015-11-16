@@ -26,7 +26,7 @@ div.tab-container
   ul.latest-updates.mobile-hide(ng-hide="json.map.latest_votes_counted_complete.length == 0")
     li.updated-text Seneste optalte:
     li.updated-region(ng-repeat="latest in json.map.latest_votes_counted_complete track by $index")
-      a(ng-href="#/resultater{{latest.path}}") {{latest.name}} #[div.stripe(ng-class="latest.block_winner")]
+      a(ng-href="#/resultater{{latest.path}}") {{latest.name}} #[div.stripe(ng-class="{'red': latest.winner === 'JA', 'blue': latest.winner === 'NEJ'}")]
   .clearfix
   p.help-text.mobile-hide Klik på kortet for at se kredsresultater, eller klik #[a(ng-href="#/resultater/landet") her] for at gå direkte til landsresultatet
 div.mobile-container.mobile-show

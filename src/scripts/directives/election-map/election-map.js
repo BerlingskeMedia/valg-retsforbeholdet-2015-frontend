@@ -16,7 +16,7 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
           if (data.status_code === 0) {
             html += "<p>Afventer optælling fra kredsen.</p>";
           } else {
-            html += "<table class=\"map-tip-table striped\">";
+/*            html += "<table class=\"map-tip-table striped\">";
             html += "<tbody>";
             html += "<tr>";
             html += "<td>Stemmeberettigede</i></td>";
@@ -39,7 +39,7 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
             html += "<td class=\"number\">"+data.votes_invalid_blank+"</td>";
             html += "</tr>";
             html += "</tbody>";
-            html += "</table>";
+            html += "</table>";*/
           }
           if (data.blue_block_votes_pct !== 0) {
             html += "<div class=\"map-tip-block\">";
