@@ -184,7 +184,27 @@ angular.module('n3-pie-utils', [])
           })
           .text(function(d){
             return d.data.label;
+          })
+          .on("mouseover", function(){
+            paths.text(function(d){
+              return d.data.value + "%";
+            });
           });
+
+        paths.exit();
+
+        svg.selectAll('.arc')
+          .on("mouseover", function(){
+          paths.text(function(d){
+            return d.data.value + "%";
+          });
+        })
+          .on("mouseout", function(){
+            paths.text(function(d){
+              return d.data.label;
+            });
+          });
+
         paths.exit().remove();
 
 
