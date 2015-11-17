@@ -1,5 +1,8 @@
 div.tab-container
-  div.teaser-header Optalte stemmer {{json.map.votes_counted_pct | number}}%
+  div.teaser-header
+    span(ng-show="json.map.status_code === 1") Afventer fintælling i kredse
+    span(ng-show="json.map.status_code === 0") Afventer optælling
+    span(ng-show="json.map.status_code === 12") Alle stemmer er optalt
     a(ng-href="{{appUrl}}" target="_top").call-to-action.mobile-hide Klik her for at følge valgets udvikling
     .clearfix
   div.tab-body(ng-mouseover="toggleshowPer(false)" ng-mouseout="toggleshowPer(true)" ng-if="!detectmobile()")
