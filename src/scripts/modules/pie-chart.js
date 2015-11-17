@@ -112,12 +112,12 @@
 angular.module('n3-pie-utils', [])
 
   .factory('$utils', [function() {
-    return {draw: function(svg) {
-      svg.append("g")
-        .attr({
-          "id": "n3-pie-arcs"
-        })
-      ;
+    return {
+      draw: function(svg) {
+        svg.append("g")
+          .attr({
+            "id": "n3-pie-arcs"
+          });
 
       return this;
     },
@@ -136,7 +136,9 @@ angular.module('n3-pie-utils', [])
 
         var paths = svg.selectAll("#n3-pie-arcs")
           .selectAll('.arc')
-          .data(tools.pie(data), function(d) {return d.data.label;})
+          .data(tools.pie(data), function(d) {return d.data.label;});
+
+
 
         paths.enter()
           .append("path")
@@ -147,8 +149,7 @@ angular.module('n3-pie-utils', [])
           .style({
             "fill": function(d) {return d.data.color;},
             "fill-opacity": 0.8
-          })
-        ;
+          });
 
         paths
           .transition()
@@ -158,8 +159,59 @@ angular.module('n3-pie-utils', [])
             this.__current = {startAngle: d.startAngle, endAngle: d.endAngle};
           })
         ;
+        paths.exit();
 
+        paths.enter()
+          .append('text')
+          .attr("class", "pie-label")
+          .attr("text-anchor", "middle")
+          .attr("fill", "#ffffff")
+          .style({"font-size": "14px"})
+          .attr("transform", function(d) {
+            var c = tools.arc.centroid(d);
+            if(d.data.label === "Nej"){
+              if(c[0] > 0){
+                c[0] -= 2;
+              }else{
+                c[0] += 2;
+              }
+              if(c[1] > 0){
+                c[1] -= 2;
+              }else{
+                c[1] += 2;
+              }
+            }
+            return "translate(" + c + ")";
+          })
+          .text(function(d){
+            return d.data.label;
+          });
         paths.exit().remove();
+
+
+        if(options.logoPath) {
+          var defs = svg.append('svg:defs');
+          defs.append('svg:pattern')
+            .attr('id', 'pie-logo')
+            .attr('patternUnits', 'userSpaceOnUse')
+            .attr('width', '60')
+            .attr('height', '60')
+            .append('svg:image')
+            .attr('xlink:href', options.logoPath)
+            .attr('x', -0.5)
+            .attr('y', 0)
+            .attr('width', 60)
+            .attr('height', 60);
+
+          svg.selectAll("#n3-pie-arcs")
+            .append("circle")
+            .attr("class", "logo")
+            .attr("cx", -30)
+            .attr("cy", 30)
+            .attr("r", tools.arc.innerRadius())
+            .style("fill", "url(#pie-logo)")
+            .attr("transform", "translate(30,-30)");
+        }
 
         return this;
       },
