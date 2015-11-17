@@ -47,7 +47,7 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
             return ($filter('number')(d.votes_pct)) + "%";
           }
         ).transition().duration(1000).attr("x", function(d) {
-            return xScale(d.votes_pct) - 10;
+            return xScale(d.votes_pct) - 25;
           }
         );
         blueBlockRect = svg.selectAll(".blue.block-rect").data([data.results.NEJ]);
@@ -79,12 +79,24 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
             return ($filter('number')(d.votes_pct)) + "%";
           }
         ).transition().duration(1000).attr("x", function(d) {
-            return svgWidth - xScale(d.votes_pct) + 10;
+            return svgWidth - xScale(d.votes_pct) + 25;
           }
         );
-        if (svgWidth <= 780) {
-          redBlockLetters.attr("display", "none");
-          blueBlockLetters.attr("display", "none");
+        if(xScale(data.results.JA.votes_pct) <= 150 || xScale(data.results.NEJ.votes_pct) <= 150) {
+          blueBlockLetters.style({"font-size": "14px"}).attr("y", 30);
+          redBlockLetters.style({"font-size": "14px"}).attr("y", 30);
+          blueBlockValue.style({"font-size": "14px"}).attr("y", 30);
+          redBlockValue.style({"font-size": "14px"}).attr("y", 30);
+        } else if(xScale(data.results.JA.votes_pct) <= 200 || xScale(data.results.NEJ.votes_pct) <= 200) {
+          blueBlockLetters.style({"font-size": "20px"}).attr("y", 32);
+          redBlockLetters.style({"font-size": "20px"}).attr("y", 32);
+          blueBlockValue.style({"font-size": "20px"}).attr("y", 32);
+          redBlockValue.style({"font-size": "20px"}).attr("y", 32);
+        } else if (xScale(data.results.JA.votes_pct) <= 240 || xScale(data.results.NEJ.votes_pct) <= 240) {
+          blueBlockLetters.style({"font-size": "30px"}).attr("y", 35);
+          redBlockLetters.style({"font-size": "30px"}).attr("y", 35);
+          blueBlockValue.style({"font-size": "30px"}).attr("y", 35);
+          redBlockValue.style({"font-size": "30px"}).attr("y", 35);
           redBlockValue.text(function(d) {
               return "JA";
             }
