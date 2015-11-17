@@ -7,7 +7,7 @@ ul.breadcrumbs
 div.table-container
   h1.app-header {{json.table.name}}
   div.pie
-    pie-chart(data="[{label: 'Ja', value: json.table.results.JA.votes_pct, color: '#F96F00'},{label:'Nej', value: json.table.results.NEJ.votes_pct, color: '#152C34'}]", options="{thickness: 35, logoPath: 'u46.png'}")
+    pie-chart(data="[{label: 'Ja', value: json.table.results.JA.votes_pct, color: '#F96F00'},{label:'Nej', value: json.table.results.NEJ.votes_pct, color: '#152C34'}]", options="{thickness: 35, logoPath: 'u46.png', legend: false}")
 
   table.overview-table
     tr

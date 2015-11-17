@@ -56,7 +56,7 @@
         $utils
           .draw(svg)
           .updatePaths(svg, data, dimensions, options)
-          .addLegend(svg)
+          .addLegend(svg, options)
           .updateLegend(svg, data, dimensions, options);
       };
 
@@ -70,7 +70,7 @@
         $utils
           .draw(svg)
           .updatePaths(svg, redrawData, dim, $scope.options)
-          .addLegend(svg)
+          .addLegend(svg, options)
           .updateLegend(svg, redrawData, dim, $scope.options);
 
       };
@@ -207,7 +207,7 @@ angular.module('n3-pie-utils', [])
             .attr("class", "logo")
             .attr("cx", -30)
             .attr("cy", 30)
-            .attr("r", tools.arc.innerRadius())
+            .attr("r", 30)
             .style("fill", "url(#pie-logo)")
             .attr("transform", "translate(30,-30)");
         }
@@ -233,18 +233,21 @@ angular.module('n3-pie-utils', [])
         return {pie: pieLayout, arc: arc};
       },
 
-      addLegend: function(svg) {
-        var items = svg.append("g")
-          .attr("id", "n3-pie-legend");
-
+      addLegend: function(svg, options) {
+        if(options.legend) {
+          var items = svg.append("g")
+            .attr("id", "n3-pie-legend");
+        }
         return this;
       },
 
       updateLegend: function(svg, data, dimensions, options) {
-        if (options.mode === "gauge") {
-          this.updateGaugeLegend(svg, data, dimensions, options);
-        } else {
-          this.updateRegularLegend(svg, data, dimensions, options);
+        if(options.legend) {
+          if (options.mode === "gauge") {
+            this.updateGaugeLegend(svg, data, dimensions, options);
+          } else {
+            this.updateRegularLegend(svg, data, dimensions, options);
+          }
         }
 
         return this;
@@ -437,7 +440,7 @@ angular.module('n3-pie-utils', [])
       },
 
       getDefaultMargins: function() {
-        return {top: 10, right: 10, bottom: 10, left: 10};
+        return {top: 0, right: 0, bottom: 0, left: 0};
       },
 
       clean: function(element) {
