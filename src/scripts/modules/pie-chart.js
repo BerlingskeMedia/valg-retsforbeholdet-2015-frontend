@@ -147,8 +147,7 @@ angular.module('n3-pie-utils', [])
             "id": function(d, i) {return "arc_" + i;}
           })
           .style({
-            "fill": function(d) {return d.data.color;},
-            "fill-opacity": 0.8
+            "fill": function(d) {return d.data.color;}
           });
 
         paths
