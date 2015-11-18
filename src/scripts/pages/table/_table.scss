@@ -1,8 +1,19 @@
+.table-flextop{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+
+}
+
+
 .pie{
   float: right;
   width: 30%;
   text-align: center;
   margin: 2em 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .overview-table {
@@ -20,6 +31,7 @@
 }
 
 .party-table {
+  margin: 0;
   td {
     &:first-child {
       width: 40px;

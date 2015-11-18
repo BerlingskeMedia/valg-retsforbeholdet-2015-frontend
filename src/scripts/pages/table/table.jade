@@ -6,29 +6,67 @@ ul.breadcrumbs
 .clearfix
 div.table-container
   h1.app-header {{json.table.name}}
-  div.pie
+  div.pie.mobile-show
     pie-chart(data="[{label: 'Ja', value: json.table.results.JA.votes_pct, color: '#F96F00'},{label:'Nej', value: json.table.results.NEJ.votes_pct, color: '#152C34'}]", options="{thickness: 35, logoPath: 'u46.png', legend: false}")
-
-  table.overview-table
+  table.overview-table.mobile-show
     tr
       td Senest opdateret:
       td {{json.table.result_time}}
       td Stemmeberettigede:
       td.number {{json.table.votes_allowed | number}}
     tr
-      td Procent optalt:
-      td.number {{((json.table.votes_made/json.table.votes_allowed)*100).toFixed(1) | number}}%
       td Stemmeprocent:
       td.number {{json.table.votes_pct | number}}%
+      td Optalte stemmer:
+      td.number {{json.table.votes_made | number}}
     tr
+      td Antal ja-stemmer:
+      td.number {{json.table.results.JA.votes | number}}
+      td Antal nej-stemmer:
+      td.number {{json.table.results.NEJ.votes | number}}
+    tr
+      td Antal blanke stemmer:
+      td.number {{(json.table.votes_invalid_blank | number) || 0}}
+      td Total antal ugyldige stemmer:
+      td.number {{(json.table.votes_invalid_total | number) || 0}}
+    tr(ng-if="json.table.areatype != 'D'")
       td(ng-if="json.table.areatype == 'L'") Optalte storkredse:
       td(ng-if="json.table.areatype == 'S'") Optalte kredse:
       td(ng-if="json.table.areatype == 'K'") Optalte valgsteder:
-      td.mobile-hide(ng-if="json.table.areatype == 'D'")
-      td.mobile-hide(ng-if="json.table.areatype == 'D'")
       td(ng-if="json.table.areatype != 'D'") {{json.table.locations_completed}} af {{json.table.locations_total}}
-      td Optalte stemmer:
-      td.number {{json.table.votes_made | number}}
+      td.mobile-hide
+      td.mobile-hide
+  div.table-flextop.mobile-hide
+    table.overview-table
+      tr
+        td Senest opdateret:
+        td {{json.table.result_time}}
+        td Stemmeberettigede:
+        td.number {{json.table.votes_allowed | number}}
+      tr
+        td Stemmeprocent:
+        td.number {{json.table.votes_pct | number}}%
+        td Optalte stemmer:
+        td.number {{json.table.votes_made | number}}
+      tr
+        td Antal ja-stemmer:
+        td.number {{json.table.results.JA.votes | number}}
+        td Antal nej-stemmer:
+        td.number {{json.table.results.NEJ.votes | number}}
+      tr
+        td Antal blanke stemmer:
+        td.number {{(json.table.votes_invalid_blank | number) || 0}}
+        td Total antal ugyldige stemmer:
+        td.number {{(json.table.votes_invalid_total | number) || 0}}
+      tr(ng-if="json.table.areatype != 'D'")
+        td(ng-if="json.table.areatype == 'L'") Optalte storkredse:
+        td(ng-if="json.table.areatype == 'S'") Optalte kredse:
+        td(ng-if="json.table.areatype == 'K'") Optalte valgsteder:
+        td(ng-if="json.table.areatype != 'D'") {{json.table.locations_completed}} af {{json.table.locations_total}}
+        td.mobile-hide
+        td.mobile-hide
+      div.pie
+        pie-chart(data="[{label: 'Ja', value: json.table.results.JA.votes_pct, color: '#F96F00'},{label:'Nej', value: json.table.results.NEJ.votes_pct, color: '#152C34'}]", options="{thickness: 35, logoPath: 'u46.png', legend: false}")
 
   table.party-table.striped(ng-if="json.table.areatype != 'D'")
     thead
