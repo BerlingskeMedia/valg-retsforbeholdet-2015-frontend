@@ -7,7 +7,9 @@ var app = angular.module ("ng-app", [
   "ngTouch",
   "ngRoute",
   "templates",
-  "n3-pie-chart"
+  "n3-pie-chart",
+  "ngSanitize"
+
 ])
   .config(['$httpProvider', '$compileProvider', '$routeProvider', function($httpProvider, $compileProvider, $routeProvider) {
 

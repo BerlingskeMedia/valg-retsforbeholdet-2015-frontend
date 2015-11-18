@@ -1,7 +1,7 @@
 app.directive('newsTicker',  function() {
   return {
     restrict: "A",
-    template: "<div class='breaking' ng-class='{fadeout: news.fade, fadein: !news.fade}' ng-mouseover='news.active = true' ng-mouseout='news.active = false'>{{news.breaking}}</div>",
+    template: "<div class='breaking' ng-class='{fadeout: news.fade, fadein: !news.fade}' ng-mouseover='news.active = true' ng-mouseout='news.active = false' ng-bind-html='news.breaking'></div>",
     bindToController: true,
     controllerAs: "news",
     controller: ["$http", "$interval", "$timeout", "$scope", function($http, $interval, $timeout, $scope){
@@ -22,7 +22,7 @@ app.directive('newsTicker',  function() {
             }
             news.fade = true;
             $timeout(function () {
-              news.breaking = "BREAKING: "+list[i].name;
+              news.breaking = list[i];
               i++;
               $timeout(function () {
                 news.fade = false;
@@ -33,9 +33,9 @@ app.directive('newsTicker',  function() {
 
       };
 
-      $http.get(apiIp + "/map").then(function(data) {
+      $http.get(apiIp + "/newsticker").then(function(data) {
           if(data.data) {
-            news.breakingList = data.data.locations;
+            news.breakingList = data.data;
             startTicker(news.breakingList);
           }
         }, function(data, status, headers, config) {}
