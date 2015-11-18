@@ -15,6 +15,14 @@ app.controller("MapController", ["$scope", "$http", "$timeout", "tracker", funct
     }
   };
 
+  $scope.areweathome = function(){
+    if(window.location != window.parent.location){
+      return false;
+    }else {
+      return true;
+    }
+  };
+
   $scope.toggleshowPer = function(value) {
 
     if(enableMouseover === false){
