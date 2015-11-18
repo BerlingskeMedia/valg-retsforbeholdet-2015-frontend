@@ -167,7 +167,7 @@ angular.module('n3-pie-utils', [])
           .attr("fill", function(d){
             return d.data.color;
           })
-          .style({"font-size": "14px"})
+          .style({"font-size": "14px", "font-weight": "bold"})
           .attr("transform", function(d) {
             var c = tools.arc.centroid(d);
             //if(d.data.label === "Nej"){
@@ -198,7 +198,7 @@ angular.module('n3-pie-utils', [])
           .attr("fill", function(d){
             return d.data.color;
           })
-          .style({"font-size": "14px"})
+          .style({"font-size": "14px", "font-weight": "bold"})
           .attr("transform", function(d) {
             var c = tools.arc.centroid(d);
             //if(d.data.label === "Nej"){
