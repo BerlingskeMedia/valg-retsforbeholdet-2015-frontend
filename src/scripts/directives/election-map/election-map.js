@@ -1,7 +1,7 @@
 app.directive('electionMap', ["$filter", "$location", "$rootScope", function($filter, $location, $rootScope) {
   return {
     restrict: "A",
-    templateUrl: "/upload/tcarlsen/danish-election-2015-results/election-map.html",
+    templateUrl: "election-map.html",
     link: function(scope, element, attrs){
       var svg = d3.select("#dk_valgkredse");
       var tip = d3.tip()

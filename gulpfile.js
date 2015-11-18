@@ -68,12 +68,26 @@ gulp.task('styles', function () {
     .pipe(gulp.dest(dest))
     .pipe(connect.reload());
 });
+/* images */
+gulp.task('images', function() {
+  return gulp.src('src/images/**/*')
+    .pipe(plumber())
+    .pipe(imagemin({
+      progressive: true,
+      interlaced: true,
+      // don't remove IDs from SVGs, they are often used
+      // as hooks for embedding and styling
+      svgoPlugins: [{cleanupIDs: false}]
+    }))
+    .pipe(gulpif(!build, changed(dest)))
+    .pipe(gulp.dest(dest));
+});
 /* Dom elements */
 gulp.task('dom', function () {
   gulp.src('src/**/*.html')
     .pipe(plumber())
     .pipe(gulpif(!build, changed(dest)))
-    .pipe(gulpif(build, rename({dirname: '/'}), rename({dirname: '/upload/tcarlsen/danish-election-2015-results'})))
+    .pipe(rename({dirname: '/'}))
     .pipe(gulpif(build, cleanhtml()))
     .pipe(gulp.dest(dest));
 
@@ -111,6 +125,7 @@ gulp.task('merge-scripts', ['dom', 'scripts', 'bower'], function () {
     .pipe(gulp.dest(dest))
     .pipe(connect.reload());
 });
+
 /* Watch task */
 gulp.task('watch', function () {
   gulp.watch(['src/**/*.js', 'src/**/*.jade'], ['merge-scripts']);
@@ -131,7 +146,7 @@ gulp.task('build', function () {
   dest = 'build';
 
   del(dest);
-  gulp.start('merge-scripts', 'styles');
+  gulp.start('merge-scripts', 'styles', 'images');
 });
 /* Default task */
 gulp.task('default', ['connect', 'merge-scripts', 'styles', 'watch']);
