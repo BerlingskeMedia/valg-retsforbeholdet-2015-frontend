@@ -5,6 +5,8 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
       var firstRun = true;
       var redBlockValue = null;
       var blueBlockValue = null;
+      var redBlockLetters = null;
+      var blueBlockLetters = null;
       var svgWidth = null;
 
       var svg = d3.select(element[0]).append("svg")
@@ -14,7 +16,7 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
 
       var render = function(data){
 
-        var blueBlockLetters, blueBlockRect, redBlockLetters, redBlockRect, svgHeight, xScale, xTotal;
+        var blueBlockRect, redBlockRect, svgHeight, xScale, xTotal;
         if (data.results.JA.votes_pct === null  || data.results.NEJ.votes_pct === null ) {
           return;
         }
@@ -131,25 +133,25 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
       });
 
       scope.$watch("showPer", function(data){
-/*        if(data === false) {
+        if(data === false) {
 
-          redBlockValue.text(function(d){
-            return "JA";
+          redBlockLetters.text(function(d){
+            return d.votes;
           });
-          blueBlockValue.text(function(d) {
-            return "NEJ"
+          blueBlockLetters.text(function(d) {
+            return d.votes;
           });
 
         }else if(data === true) {
 
 
-          redBlockValue.text(function(d){
+          redBlockLetters.text(function(d){
             return d.votes_pct+"%";
           });
-          blueBlockValue.text(function(d) {
+          blueBlockLetters.text(function(d) {
             return d.votes_pct+"%";
           });
-        }*/
+        }
       });
 
     }
