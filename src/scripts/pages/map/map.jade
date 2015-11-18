@@ -6,8 +6,9 @@ div.tab-container
   .clearfix
   div.tab-body(ng-click="toggleshowPer()" ng-if="detectmobile()")
     div.block-poll(block-poll)
-  div.tab-body(ng-mouseover="toggleshowPer(false)" ng-mouseout="toggleshowPer(true)" ng-if="!detectmobile()")
-    div.block-poll(block-poll)
+  div.tab-body(ng-if="!detectmobile()")
+    div.block-poll(block-poll ng-mouseover="toggleshowPer(false)" ng-mouseout="toggleshowPer(true)")
+    div.news-ticker(news-ticker)
 
   div.map-container.mobile-hide
     div.election-map(election-map)

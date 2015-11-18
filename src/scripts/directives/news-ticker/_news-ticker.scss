@@ -1,0 +1,22 @@
+
+.news-ticker{
+  height: 1em;
+  margin-top: 10px;
+  overflow: hidden;
+  font-size: 0.8em;
+  line-height: 0.8em;
+  transition: color linear 100ms;
+
+  &:hover{
+    color: $primary;
+  }
+}
+
+.fadeout{
+  margin-top: -25px;
+  transition: margin 0.5s ease;
+}
+.fadein{
+  margin-top: 0px;
+  transition: margin 0.5s ease;
+}

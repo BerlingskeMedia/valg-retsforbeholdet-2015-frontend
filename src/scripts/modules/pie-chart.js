@@ -28,8 +28,8 @@
       var promise;
 
       var updateDimensions = function(dimensions) {
-        dimensions.width = 230;
-        dimensions.height = 230;
+        dimensions.width = 240;
+        dimensions.height = 240;
       };
 
       var update = function(data, options) {
@@ -475,7 +475,7 @@ angular.module('n3-pie-utils', [])
       },
 
       getDefaultMargins: function() {
-        return {top: 40, right: 40, bottom: 40, left: 40};
+        return {top: 45, right: 45, bottom: 45, left: 45};
       },
 
       clean: function(element) {
