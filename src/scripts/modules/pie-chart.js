@@ -28,8 +28,8 @@
       var promise;
 
       var updateDimensions = function(dimensions) {
-        dimensions.width = 150;
-        dimensions.height = 150;
+        dimensions.width = 230;
+        dimensions.height = 230;
       };
 
       var update = function(data, options) {
@@ -70,7 +70,7 @@
         $utils
           .draw(svg)
           .updatePaths(svg, redrawData, dim, $scope.options)
-          .addLegend(svg, options)
+          .addLegend(svg, $scope.options)
           .updateLegend(svg, redrawData, dim, $scope.options);
 
       };
@@ -164,46 +164,61 @@ angular.module('n3-pie-utils', [])
           .append('text')
           .attr("class", "pie-label")
           .attr("text-anchor", "middle")
-          .attr("fill", "#ffffff")
+          .attr("fill", function(d){
+            return d.data.color;
+          })
           .style({"font-size": "14px"})
           .attr("transform", function(d) {
             var c = tools.arc.centroid(d);
-            if(d.data.label === "Nej"){
-              if(c[0] > 0){
-                c[0] -= 2;
-              }else{
-                c[0] += 2;
-              }
-              if(c[1] > 0){
-                c[1] -= 2;
-              }else{
-                c[1] += 2;
-              }
-            }
-            return "translate(" + c + ")";
+            //if(d.data.label === "Nej"){
+            //  if(c[0] > 0){
+            //    c[0] -= 2;
+            //  }else{
+            //    c[0] += 2;
+            //  }
+            //  if(c[1] > 0){
+            //    c[1] -= 2;
+            //  }else{
+            //    c[1] += 2;
+            //  }
+            //}
+            return "translate(" + c[0]*1.75 + "," + c[1]*1.75 + ")";
           })
           .text(function(d){
             return d.data.label;
-          })
-          .on("mouseover", function(){
-            paths.text(function(d){
-              return d.data.value + "%";
-            });
           });
 
         paths.exit();
 
-        svg.selectAll('.arc')
-          .on("mouseover", function(){
-          paths.text(function(d){
+        paths.enter()
+          .append('text')
+          .attr("class", "pie-value")
+          .attr("text-anchor", "middle")
+          .attr("y", 14)
+          .attr("fill", function(d){
+            return d.data.color;
+          })
+          .style({"font-size": "14px"})
+          .attr("transform", function(d) {
+            var c = tools.arc.centroid(d);
+            //if(d.data.label === "Nej"){
+            //  if(c[0] > 0){
+            //    c[0] -= 2;
+            //  }else{
+            //    c[0] += 2;
+            //  }
+            //  if(c[1] > 0){
+            //    c[1] -= 2;
+            //  }else{
+            //    c[1] += 2;
+            //  }
+            //}
+            return "translate(" + c[0]*1.75 + "," + c[1]*1.75 + ")";
+          })
+          .text(function(d){
             return d.data.value + "%";
           });
-        })
-          .on("mouseout", function(){
-            paths.text(function(d){
-              return d.data.label;
-            });
-          });
+
 
         paths.exit().remove();
 
@@ -460,7 +475,7 @@ angular.module('n3-pie-utils', [])
       },
 
       getDefaultMargins: function() {
-        return {top: 0, right: 0, bottom: 0, left: 0};
+        return {top: 40, right: 40, bottom: 40, left: 40};
       },
 
       clean: function(element) {
