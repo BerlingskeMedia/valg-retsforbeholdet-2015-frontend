@@ -14,37 +14,12 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
           var html = "<h2 class=\"map-tip-header\">";
           if(data.status_code === 12){
             html+= "<div class=\"map-tip-counted\">Alle stemmer optalt</div>";
-          }else if(data.status_code === 1){
+          }else if(data.status_code != 0){
             html+= "<div class=\"map-tip-counted\">Afventer fintælling</div>";
           }
           html += data.name + "</h2>";
           if (data.status_code === 0) {
             html += "<p>Afventer optælling fra kredsen.</p>";
-          } else {
-/*            html += "<table class=\"map-tip-table striped\">";
-            html += "<tbody>";
-            html += "<tr>";
-            html += "<td>Stemmeberettigede</i></td>";
-            html += "<td class=\"number\">"+data.votes_allowed+"</td>";
-            html += "</tr>";
-            html += "<tr>";
-            html += "<td>Ja-stemmer</i></td>";
-            html += "<td class=\"number\">"+data.results.JA.votes+"</td>";
-            html += "</tr>";
-            html += "<tr>";
-            html += "<td>Nej-stemmer</i></td>";
-            html += "<td class=\"number\">"+data.results.NEJ.votes+"</td>";
-            html += "</tr>";
-            html += "<tr>";
-            html += "<td>Ugyldige stemmer</i></td>";
-            html += "<td class=\"number\">"+data.votes_invalid_total+"</td>";
-            html += "</tr>";
-            html += "<tr>";
-            html += "<td>Blanke stemmer</i></td>";
-            html += "<td class=\"number\">"+data.votes_invalid_blank+"</td>";
-            html += "</tr>";
-            html += "</tbody>";
-            html += "</table>";*/
           }
           if (data.blue_block_votes_pct !== 0) {
             html += "<div class=\"map-tip-block\">";
@@ -62,7 +37,7 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
         if(block === "JA"){
           if(statuscode === 12) {
             return "red";
-          }else if(statuscode === 1){
+          }else if(statuscode != 0){
             return "light-red";
           }else{
             return "neutral";
@@ -72,7 +47,7 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
 
           if(statuscode === 12) {
             return "blue";
-          }else if(statuscode === 1){
+          }else if(statuscode != 0){
             return "light-blue";
           }else{
             return "neutral";

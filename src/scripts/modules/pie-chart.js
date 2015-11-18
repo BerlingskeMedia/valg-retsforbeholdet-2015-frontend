@@ -152,7 +152,7 @@ angular.module('n3-pie-utils', [])
 
         paths
           .transition()
-          .duration(250)
+          .duration(1000)
           .attrTween("d", tween)
           .each("end", function(d) {
             this.__current = {startAngle: d.startAngle, endAngle: d.endAngle};
