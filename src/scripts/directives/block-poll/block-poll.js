@@ -3,10 +3,10 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
     restrict: "A",
     link: function(scope, element, attrs){
       var firstRun = true;
-      var redBlockValue = null;
-      var blueBlockValue = null;
-      var redBlockLetters = null;
-      var blueBlockLetters = null;
+      var yesBlockLabel = null;
+      var noBlockValue = null;
+      var yesBlockValue = null;
+      var noBlockValue = null;
       var svgWidth = null;
 
       var svg = d3.select(element[0]).append("svg")
@@ -16,7 +16,7 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
 
       var render = function(data){
 
-        var blueBlockRect, redBlockRect, svgHeight, xScale, xTotal;
+        var noBlockRect, yesBlockRect, svgHeight, xScale, xTotal;
         if (data.results.JA.votes_pct === null  || data.results.NEJ.votes_pct === null ) {
           return;
         }
@@ -27,9 +27,9 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
           xTotal = 2;
         }
         xScale = d3.scale.linear().domain([0, xTotal]).range([0, svgWidth]);
-        redBlockRect = svg.selectAll(".red.block-rect").data([data.results.JA]);
-        redBlockRect.enter().append("rect").attr("class", "red block-rect").attr("height", svgHeight).attr("width", 0).attr("y", 0).attr("x", 0);
-        redBlockRect.transition().duration(1000).attr("width", function(d) {
+        yesBlockRect = svg.selectAll(".red.block-rect").data([data.results.JA]);
+        yesBlockRect.enter().append("rect").attr("class", "red block-rect").attr("height", svgHeight).attr("width", 0).attr("y", 0).attr("x", 0);
+        yesBlockRect.transition().duration(1000).attr("width", function(d) {
             if (d.votes_pct === 0 && xTotal === 2) {
               return xScale(1);
             } else {
@@ -37,24 +37,24 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
             }
           }
         );
-        redBlockValue = svg.selectAll(".red.block-value").data([data.results.JA]);
-        redBlockValue.enter().append("text").attr("class", "red block-value").attr("x", 10).attr("y", 38).attr("text-anchor", "start");
-        redBlockValue.text(function(d) {
+        yesBlockLabel = svg.selectAll(".red.block-value").data([data.results.JA]);
+        yesBlockLabel.enter().append("text").attr("class", "red block-value").attr("x", 10).attr("y", 38).attr("text-anchor", "start");
+        yesBlockLabel.text(function(d) {
             return "JA";
           }
         );
-        redBlockLetters = svg.selectAll(".red.block-letters").data([data.results.JA]);
-        redBlockLetters.enter().append("text").attr("class", "red block-letters").attr("y", 38).attr("text-anchor", "end");
-        redBlockLetters.text(function(d) {
+        yesBlockValue = svg.selectAll(".red.block-letters").data([data.results.JA]);
+        yesBlockValue.enter().append("text").attr("class", "red block-letters").attr("y", 38).attr("text-anchor", "end");
+        yesBlockValue.text(function(d) {
             return ($filter('number')(d.votes_pct)) + "%";
           }
         ).transition().duration(1000).attr("x", function(d) {
             return xScale(d.votes_pct) - 25;
           }
         );
-        blueBlockRect = svg.selectAll(".blue.block-rect").data([data.results.NEJ]);
-        blueBlockRect.enter().append("rect").attr("class", "blue block-rect").attr("height", svgHeight).attr("width", 0).attr("y", 0).attr("x", svgWidth);
-        blueBlockRect.transition().duration(1000).attr("x", function(d) {
+        noBlockRect = svg.selectAll(".blue.block-rect").data([data.results.NEJ]);
+        noBlockRect.enter().append("rect").attr("class", "blue block-rect").attr("height", svgHeight).attr("width", 0).attr("y", 0).attr("x", svgWidth);
+        noBlockRect.transition().duration(1000).attr("x", function(d) {
             if (d.votes_pct === 0 && xTotal === 2) {
               return svgWidth - xScale(1);
             } else {
@@ -69,15 +69,15 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
             }
           }
         );
-        blueBlockValue = svg.selectAll(".blue.block-value").data([data.results.NEJ]);
-        blueBlockValue.enter().append("text").attr("class", "blue block-value").attr("x", svgWidth - 10).attr("y", 38).attr("text-anchor", "end");
-        blueBlockValue.text(function(d) {
+        noBlockValue = svg.selectAll(".blue.block-value").data([data.results.NEJ]);
+        noBlockValue.enter().append("text").attr("class", "blue block-value").attr("x", svgWidth - 10).attr("y", 38).attr("text-anchor", "end");
+        noBlockValue.text(function(d) {
             return "NEJ";
           }
         );
-        blueBlockLetters = svg.selectAll(".blue.block-letters").data([data.results.NEJ]);
-        blueBlockLetters.enter().append("text").attr("class", "blue block-letters").attr("y", 38).attr("text-anchor", "start");
-        blueBlockLetters.text(function(d) {
+        noBlockValue = svg.selectAll(".blue.block-letters").data([data.results.NEJ]);
+        noBlockValue.enter().append("text").attr("class", "blue block-letters").attr("y", 38).attr("text-anchor", "start");
+        noBlockValue.text(function(d) {
             return ($filter('number')(d.votes_pct)) + "%";
           }
         ).transition().duration(1000).attr("x", function(d) {
@@ -85,25 +85,25 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
           }
         );
         if(xScale(data.results.JA.votes_pct) <= 150 || xScale(data.results.NEJ.votes_pct) <= 150) {
-          blueBlockLetters.style({"font-size": "14px"}).attr("y", 30);
-          redBlockLetters.style({"font-size": "14px"}).attr("y", 30);
-          blueBlockValue.style({"font-size": "14px"}).attr("y", 30);
-          redBlockValue.style({"font-size": "14px"}).attr("y", 30);
+          noBlockValue.style({"font-size": "14px"}).attr("y", 30);
+          yesBlockValue.style({"font-size": "14px"}).attr("y", 30);
+          noBlockValue.style({"font-size": "14px"}).attr("y", 30);
+          yesBlockLabel.style({"font-size": "14px"}).attr("y", 30);
         } else if(xScale(data.results.JA.votes_pct) <= 200 || xScale(data.results.NEJ.votes_pct) <= 200) {
-          blueBlockLetters.style({"font-size": "20px"}).attr("y", 32);
-          redBlockLetters.style({"font-size": "20px"}).attr("y", 32);
-          blueBlockValue.style({"font-size": "20px"}).attr("y", 32);
-          redBlockValue.style({"font-size": "20px"}).attr("y", 32);
+          noBlockValue.style({"font-size": "20px"}).attr("y", 32);
+          yesBlockValue.style({"font-size": "20px"}).attr("y", 32);
+          noBlockValue.style({"font-size": "20px"}).attr("y", 32);
+          yesBlockLabel.style({"font-size": "20px"}).attr("y", 32);
         } else if (xScale(data.results.JA.votes_pct) <= 240 || xScale(data.results.NEJ.votes_pct) <= 240) {
-          blueBlockLetters.style({"font-size": "30px"}).attr("y", 35);
-          redBlockLetters.style({"font-size": "30px"}).attr("y", 35);
-          blueBlockValue.style({"font-size": "30px"}).attr("y", 35);
-          redBlockValue.style({"font-size": "30px"}).attr("y", 35);
-          redBlockValue.text(function(d) {
+          noBlockValue.style({"font-size": "30px"}).attr("y", 35);
+          yesBlockValue.style({"font-size": "30px"}).attr("y", 35);
+          noBlockValue.style({"font-size": "30px"}).attr("y", 35);
+          yesBlockLabel.style({"font-size": "30px"}).attr("y", 35);
+          yesBlockLabel.text(function(d) {
               return "JA";
             }
           );
-          return blueBlockValue.text(function(d) {
+          return noBlockValue.text(function(d) {
               return "NEJ";
             }
           );
@@ -135,20 +135,19 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
       scope.$watch("showPer", function(data){
         if(data === false) {
 
-          redBlockLetters.text(function(d){
+          yesBlockValue.text(function(d){
             return d.votes;
           });
-          blueBlockLetters.text(function(d) {
+          noBlockValue.text(function(d) {
             return d.votes;
           });
 
         }else if(data === true) {
 
-
-          redBlockLetters.text(function(d){
+          yesBlockValue.text(function(d){
             return d.votes_pct+"%";
           });
-          blueBlockLetters.text(function(d) {
+          noBlockValue.text(function(d) {
             return d.votes_pct+"%";
           });
         }
