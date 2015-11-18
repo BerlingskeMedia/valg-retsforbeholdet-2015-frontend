@@ -25,6 +25,8 @@ div.tab-container
         div.block.neutral
         div.block.neutral
         p.block-text Kredsen er endnu ikke optalt
+    div.source-container-map
+          span.source Kilde: Danmarks Statistik
   ul.latest-updates.mobile-hide(ng-hide="json.map.latest_votes_counted_complete.length == 0")
     li.updated-text Seneste optalte:
     li.updated-region(ng-repeat="latest in json.map.latest_votes_counted_complete track by $index")
@@ -55,4 +57,5 @@ div.mobile-container.mobile-show
         td.number {{constituency.votes_made}}
         td.number {{constituency.results.JA.votes_pct | number}}%
         td.number {{constituency.results.NEJ.votes_pct | number}}%
-  div
+  div.source-container
+    span.source Kilde: Danmarks Statistik
