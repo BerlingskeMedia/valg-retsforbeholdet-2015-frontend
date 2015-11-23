@@ -44,15 +44,20 @@ app.controller("MapController", ["$scope", "$http", "$timeout", "tracker", funct
   };
 
   $scope.changeOrder = function(order) {
-    if ($scope.order === order) {
-      return $scope.reverse = !$scope.reverse;
-    } else {
-      $scope.order = order;
-      return $scope.reverse = false;
+    if(!doubleClickCheck) {
+      if ($scope.order === order) {
+        $scope.reverse = !$scope.reverse;
+      } else {
+        $scope.order = order;
+        $scope.reverse = false;
+      }
+      doubleClickCheck = true;
+      $timeout(function(){
+        doubleClickCheck = false;
+      },500);
     }
 
   };
-
 
   $http.get(apiIp+"/map").then(function(data){
     if(data.data) {

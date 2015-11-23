@@ -1,4 +1,6 @@
-app.controller("TableController", ["$scope", "$http", "$routeParams", "tracker",  function($scope, $http, $routeParams, tracker) {
+app.controller("TableController", ["$scope", "$http", "$routeParams", "tracker", "$timeout",  function($scope, $http, $routeParams, tracker, $timeout) {
+
+  var doubleClickCheck = false;
 
   var apiUrl;
   apiUrl = $routeParams.path;
@@ -11,11 +13,20 @@ app.controller("TableController", ["$scope", "$http", "$routeParams", "tracker",
   $scope.reverse = false;
 
   $scope.changeOrder = function(order) {
-    if ($scope.order === order) {
-      return $scope.reverse = !$scope.reverse;
-    } else {
-      $scope.order = order;
-      return $scope.reverse = false;
+    if(!doubleClickCheck) {
+      doubleClickCheck = true;
+
+      if ($scope.order === order) {
+        $scope.reverse = !$scope.reverse;
+      } else {
+        $scope.order = order;
+        $scope.reverse = false;
+      };
+
+      $timeout(function(){
+        doubleClickCheck = false;
+      },500);
+
     }
 
   };
