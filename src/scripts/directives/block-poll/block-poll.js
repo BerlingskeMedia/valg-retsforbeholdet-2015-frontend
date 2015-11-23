@@ -142,7 +142,7 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
       scope.$watch("showPer", function(data){
         if(data === false && xScale(scope.json.map.results.JA.votes_pct) >= 280 && xScale(scope.json.map.results.NEJ.votes_pct) >= 280) {
           yesBlockValue.text(function(d){
-            return "stemmer "+($filter('number')(d.votes));
+            return ($filter('number')(d.votes))+" stemmer";
           }).style({"font-size": "20px", "text-transform":"none" }).attr("y", 32);
           noBlockValue.text(function(d) {
             return ($filter('number')(d.votes))+" stemmer";
