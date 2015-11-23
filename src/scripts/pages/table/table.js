@@ -21,14 +21,15 @@ app.controller("TableController", ["$scope", "$http", "$routeParams", "tracker",
       } else {
         $scope.order = order;
         $scope.reverse = false;
-      };
-
+      }
       $timeout(function(){
         doubleClickCheck = false;
       },500);
-
     }
+  };
 
+  $scope.convertDate = function(datetime){
+    return new Date(datetime);
   };
 
   $http.get(apiIp + "/" + apiUrl).success(function(data) {
