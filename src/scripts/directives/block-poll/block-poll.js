@@ -4,10 +4,12 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
     link: function(scope, element, attrs){
       var firstRun = true;
       var yesBlockLabel = null;
-      var noBlockValue = null;
+      var noBlockLabel = null;
       var yesBlockValue = null;
       var noBlockValue = null;
       var svgWidth = null;
+      var xScale = null;
+      var xTotal= null;
 
       var svg = d3.select(element[0]).append("svg")
         .attr("width", "100%")
@@ -16,7 +18,7 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
 
       var render = function(data){
 
-        var noBlockRect, yesBlockRect, svgHeight, xScale, xTotal;
+        var noBlockRect, yesBlockRect, svgHeight;
         if (data.results.JA.votes_pct === null  || data.results.NEJ.votes_pct === null ) {
           return;
         }
@@ -46,7 +48,7 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
         yesBlockValue = svg.selectAll(".red.block-letters").data([data.results.JA]);
         yesBlockValue.enter().append("text").attr("class", "red block-letters").attr("y", 38).attr("text-anchor", "end");
         yesBlockValue.text(function(d) {
-            return ($filter('number')(d.votes_pct)) + "%";
+            return ($filter('number')(d.votes_pct)) + " %";
           }
         ).transition().duration(1000).attr("x", function(d) {
             return xScale(d.votes_pct) - 25;
@@ -69,41 +71,46 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
             }
           }
         );
-        noBlockValue = svg.selectAll(".blue.block-value").data([data.results.NEJ]);
-        noBlockValue.enter().append("text").attr("class", "blue block-value").attr("x", svgWidth - 10).attr("y", 38).attr("text-anchor", "end");
-        noBlockValue.text(function(d) {
+        noBlockLabel = svg.selectAll(".blue.block-value").data([data.results.NEJ]);
+        noBlockLabel.enter().append("text").attr("class", "blue block-value").attr("x", svgWidth - 10).attr("y", 38).attr("text-anchor", "end");
+        noBlockLabel.text(function(d) {
             return "NEJ";
           }
         );
         noBlockValue = svg.selectAll(".blue.block-letters").data([data.results.NEJ]);
         noBlockValue.enter().append("text").attr("class", "blue block-letters").attr("y", 38).attr("text-anchor", "start");
         noBlockValue.text(function(d) {
-            return ($filter('number')(d.votes_pct)) + "%";
+            return ($filter('number')(d.votes_pct)) + " %";
           }
         ).transition().duration(1000).attr("x", function(d) {
             return svgWidth - xScale(d.votes_pct) + 25;
           }
         );
-        if(xScale(data.results.JA.votes_pct) <= 150 || xScale(data.results.NEJ.votes_pct) <= 150) {
+        if(xScale(data.results.JA.votes_pct) <= 105 || xScale(data.results.NEJ.votes_pct) <= 105){
+          noBlockValue.attr("display", "none");
+          yesBlockValue.attr("display", "none");
+          noBlockLabel.style({"font-size": "20px"}).attr("y", 32);
+          yesBlockLabel.style({"font-size": "20px"}).attr("y", 32);
+        }else if(xScale(data.results.JA.votes_pct) <= 150 || xScale(data.results.NEJ.votes_pct) <= 150) {
           noBlockValue.style({"font-size": "14px"}).attr("y", 30);
           yesBlockValue.style({"font-size": "14px"}).attr("y", 30);
-          noBlockValue.style({"font-size": "14px"}).attr("y", 30);
+          noBlockLabel.style({"font-size": "14px"}).attr("y", 30);
           yesBlockLabel.style({"font-size": "14px"}).attr("y", 30);
         } else if(xScale(data.results.JA.votes_pct) <= 200 || xScale(data.results.NEJ.votes_pct) <= 200) {
           noBlockValue.style({"font-size": "20px"}).attr("y", 32);
           yesBlockValue.style({"font-size": "20px"}).attr("y", 32);
-          noBlockValue.style({"font-size": "20px"}).attr("y", 32);
+          noBlockLabel.style({"font-size": "20px"}).attr("y", 32);
           yesBlockLabel.style({"font-size": "20px"}).attr("y", 32);
         } else if (xScale(data.results.JA.votes_pct) <= 240 || xScale(data.results.NEJ.votes_pct) <= 240) {
           noBlockValue.style({"font-size": "30px"}).attr("y", 35);
           yesBlockValue.style({"font-size": "30px"}).attr("y", 35);
-          noBlockValue.style({"font-size": "30px"}).attr("y", 35);
+          noBlockLabel.style({"font-size": "30px"}).attr("y", 35);
           yesBlockLabel.style({"font-size": "30px"}).attr("y", 35);
           yesBlockLabel.text(function(d) {
               return "JA";
             }
           );
-          return noBlockValue.text(function(d) {
+          return noBlockLabel.text(function(d) {
               return "NEJ";
             }
           );
@@ -133,23 +140,38 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
       });
 
       scope.$watch("showPer", function(data){
-        if(data === false) {
-
+        if(data === false && xScale(scope.json.map.results.JA.votes_pct) >= 280 && xScale(scope.json.map.results.NEJ.votes_pct) >= 280) {
           yesBlockValue.text(function(d){
-            return d.votes;
-          });
+            return "stemmer "+($filter('number')(d.votes));
+          }).style({"font-size": "20px", "text-transform":"none" }).attr("y", 32);
           noBlockValue.text(function(d) {
-            return d.votes;
-          });
+            return ($filter('number')(d.votes))+" stemmer";
+          }).style({"font-size": "20px", "text-transform":"none" }).attr("y", 32);
 
         }else if(data === true) {
 
-          yesBlockValue.text(function(d){
-            return d.votes_pct+"%";
+          yesBlockValue.text(function (d) {
+            return ($filter('number')(d.votes_pct)) + " %";
           });
-          noBlockValue.text(function(d) {
-            return d.votes_pct+"%";
+          noBlockValue.text(function (d) {
+            return ($filter('number')(d.votes_pct)) + " %";
           });
+
+
+          if (xScale(scope.json.map.results.JA.votes_pct) <= 150 || xScale(scope.json.map.results.NEJ.votes_pct) <= 150) {
+            noBlockValue.style({"font-size": "14px"}).attr("y", 30);
+            yesBlockValue.style({"font-size": "14px"}).attr("y", 30);
+          } else if (xScale(scope.json.map.results.JA.votes_pct) <= 200 || xScale(scope.json.map.results.NEJ.votes_pct) <= 200) {
+            noBlockValue.style({"font-size": "20px"}).attr("y", 32);
+            yesBlockValue.style({"font-size": "20px"}).attr("y", 32);
+          } else if (xScale(scope.json.map.results.JA.votes_pct) <= 240 || xScale(scope.json.map.results.NEJ.votes_pct) <= 240) {
+            noBlockValue.style({"font-size": "30px"}).attr("y", 35);
+            yesBlockValue.style({"font-size": "30px"}).attr("y", 35);
+          } else{
+            noBlockValue.style({"font-size": "40px"}).attr("y", 38);
+            yesBlockValue.style({"font-size": "40px"}).attr("y", 38);
+
+          }
         }
       });
 

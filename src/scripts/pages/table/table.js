@@ -28,6 +28,6 @@ app.controller("TableController", ["$scope", "$http", "$routeParams", "tracker",
     }
   );
 
-  tracker.track();
+  //tracker.track();
 
 }]);

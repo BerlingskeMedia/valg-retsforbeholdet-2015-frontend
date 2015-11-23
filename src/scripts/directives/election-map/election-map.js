@@ -21,7 +21,7 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", function($fi
           if (data.status_code === 0) {
             html += "<p>Afventer optælling fra kredsen.</p>";
           }
-          if (data.blue_block_votes_pct !== 0) {
+          if (data.blue_block_votes_pct !== 0 && data.status_code !== 0) {
             html += "<div class=\"map-tip-block\">";
             html += "<div class=\"map-tip-red\">" + red + "%</div>";
             html += "<div class=\"map-tip-blue\" style=\"width:" + data.results.NEJ.votes_pct + "%\">" + blue + "%</div>";

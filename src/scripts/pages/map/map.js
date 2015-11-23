@@ -15,13 +15,14 @@ app.controller("MapController", ["$scope", "$http", "$timeout", "tracker", funct
     }
   };
 
-  $scope.areweathome = function(){
-    if(window.location != window.parent.location){
+  $scope.tickerCheck = function(){
+    if((window.location != window.parent.location) || window.innerWidth <= 800){
       return false;
     }else {
       return true;
     }
   };
+
 
   $scope.toggleshowPer = function(value) {
 
@@ -66,6 +67,6 @@ app.controller("MapController", ["$scope", "$http", "$timeout", "tracker", funct
 
   });
 
-  tracker.track();
+  //tracker.track();
 
 }]);
