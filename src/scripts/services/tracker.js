@@ -6,7 +6,7 @@ app.service("tracker", ["$location" ,function($location){
       var url = $location.$$absUrl;
 
       if(host != "localhost"){
-        var appId = "valgresultat";
+        var appId = "retsforbeholdet";
         var appPath = $location.$$path;
 
         if(url.split("upload").length === 2) {
@@ -17,7 +17,11 @@ app.service("tracker", ["$location" ,function($location){
         }else {
           host = "politiko";
         }
-        ga("send", "pageview", host + "-" + appId + "/#" + appPath);
+        console.log({
+          'pageview': host + "-" + appId + "/#" + appPath,
+          'url': url
+        });
+        ga("send", "pageview", host + "-" + appId + "-" + appPath);
       }
     }
   }

@@ -3,3 +3,6 @@ build
 app
 .tmp
 .idea
+
+# Sublime Text 2
+*.sublime-*

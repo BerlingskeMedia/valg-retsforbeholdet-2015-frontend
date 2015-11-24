@@ -41,7 +41,7 @@ app.controller("TeaserController", ["$scope", "$http", "$timeout", "$routeParams
     }
   };
 
-  $http.get(apiIp + "/map").then(function(data) {
+  $http.get(apiIp + "/teaser").then(function(data) {
       if(data.data) {
         $scope.json.map = data.data;
         if (data.data.results && data.data.results.JA.votes_pct + data.data.results.NEJ.votes_pct >= 95) {
