@@ -25,8 +25,8 @@ app.controller("TeaserController", ["$scope", "$http", "$timeout", "$routeParams
     }
   };
 
-  $scope.areweathome = function(){
-    if(window.location != window.parent.location){
+  $scope.tickerCheck = function(){
+    if((window.location != window.parent.location) || window.innerWidth <= 800){
       return false;
     }else {
       return true;

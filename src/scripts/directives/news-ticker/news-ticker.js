@@ -15,26 +15,37 @@ app.directive('newsTicker',  function() {
 
       var ticker;
       var tickInterval = 5000;
+      var firstRun = true;
 
       news.breaking = "";
       news.fade = false;
 
       var startTicker  = function(list){
-        var i = 0;
-        ticker = $interval(function(){
-          if(!news.active) {
-            if (i === list.length - 1) {
-              i = 0;
-            }
-            news.fade = !news.fade;
-            $timeout(function () {
-              news.breaking = list[i];
-              i++;
-              news.fade = !news.fade;
-            }, 700);
-          }
-        }, tickInterval);
+        var i = 1;
 
+        if(firstRun){
+          news.fade = !news.fade;
+          $timeout(function () {
+            news.breaking = list[0];
+            news.fade = !news.fade;
+          }, 700);
+          firstRun = false;
+          startTicker(list);
+        }else {
+          ticker = $interval(function () {
+            if (!news.active) {
+              if (i === list.length - 1) {
+                i = 0;
+              }
+              news.fade = !news.fade;
+              $timeout(function () {
+                news.breaking = list[i];
+                i++;
+                news.fade = !news.fade;
+              }, 700);
+            }
+          }, tickInterval);
+        }
       };
 
       $http.get(apiIp + "/newsticker").then(function(data) {
@@ -45,9 +56,7 @@ app.directive('newsTicker',  function() {
         }, function(data, status, headers, config) {}
       );
 
-      //$scope.on("$destroy", function(){
-      //  $interval.cancel(ticker, 0);
-      //})
+
     }]
   }
 });
