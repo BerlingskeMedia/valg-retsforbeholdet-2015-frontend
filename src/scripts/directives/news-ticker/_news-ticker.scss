@@ -1,17 +1,21 @@
 
 .news-ticker{
-  height: 1em;
+  height: 1.1em;
   margin-top: 10px;
   overflow: hidden;
   font-size: 0.8em;
-  line-height: 0.8em;
+  line-height: 1.1em;
   transition: color linear 100ms;
 
   &:hover{
     //color: $primary;
   }
 }
-.breaking{
+.front, .back{
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   a {
     color: inherit;
     text-decoration: none;
@@ -22,11 +26,53 @@
     }
   }
 }
-.fadeout{
-  margin-top: -25px;
-  transition: margin 0.5s ease;
+
+/* entire container, keeps perspective */
+.flip-container {
+  perspective: 1000;
 }
-.fadein{
-  margin-top: 0px;
-  transition: margin 0.5s ease;
+/* flip the pane when hovered */
+.flipper.flip {
+  .back {
+    transform: rotateX(0deg);
+  }
+  .front{
+    transform: rotateX(180deg);
+  }
+}
+
+.flip-container, .flipper, .front, .back {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+
+}
+
+/* flip speed goes here */
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  transform-origin: 100% 50%; /* half of height */
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+  backface-visibility: hidden;
+  transition: 0.6s;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateX(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  transform: rotateX(-180deg);
 }

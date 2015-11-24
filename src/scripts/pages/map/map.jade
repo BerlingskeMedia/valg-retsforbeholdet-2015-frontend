@@ -8,7 +8,7 @@ div.tab-container
     div.block-poll(block-poll)
   div.tab-body(ng-if="!detectmobile()")
     div.block-poll(block-poll ng-mouseover="toggleshowPer(false)" ng-mouseout="toggleshowPer(true)")
-    div.news-ticker(news-ticker ng-if="areweathome()")
+    div.news-ticker(news-ticker ng-if="tickerCheck()")
 
   div.map-container.mobile-hide
     div.election-map(election-map)

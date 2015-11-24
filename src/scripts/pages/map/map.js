@@ -15,13 +15,14 @@ app.controller("MapController", ["$scope", "$http", "$timeout", "tracker", funct
     }
   };
 
-  $scope.areweathome = function(){
-    if(window.location != window.parent.location){
+  $scope.tickerCheck = function(){
+    if((window.location != window.parent.location) || window.innerWidth <= 800){
       return false;
     }else {
       return true;
     }
   };
+
 
   $scope.toggleshowPer = function(value) {
 
@@ -43,15 +44,20 @@ app.controller("MapController", ["$scope", "$http", "$timeout", "tracker", funct
   };
 
   $scope.changeOrder = function(order) {
-    if ($scope.order === order) {
-      return $scope.reverse = !$scope.reverse;
-    } else {
-      $scope.order = order;
-      return $scope.reverse = false;
+    if(!doubleClickCheck) {
+      if ($scope.order === order) {
+        $scope.reverse = !$scope.reverse;
+      } else {
+        $scope.order = order;
+        $scope.reverse = false;
+      }
+      doubleClickCheck = true;
+      $timeout(function(){
+        doubleClickCheck = false;
+      },500);
     }
 
   };
-
 
   $http.get(apiIp+"/map").then(function(data){
     if(data.data) {
@@ -66,6 +72,6 @@ app.controller("MapController", ["$scope", "$http", "$timeout", "tracker", funct
 
   });
 
-  tracker.track();
+  //tracker.track();
 
 }]);

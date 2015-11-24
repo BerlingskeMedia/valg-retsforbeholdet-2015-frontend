@@ -1,7 +1,13 @@
 app.directive('newsTicker',  function() {
   return {
     restrict: "A",
-    template: "<div class='breaking' ng-class='{fadeout: news.fade, fadein: !news.fade}' ng-mouseover='news.active = true' ng-mouseout='news.active = false' ng-bind-html='news.breaking'></div>",
+    //template: "<div class='breaking' ng-class='{fadeout: news.fade, fadein: !news.fade}' ng-mouseover='news.active = true' ng-mouseout='news.active = false' ng-bind-html='news.breaking'></div>",
+    template: "<div class='flip-container' ng-mouseover='news.active = true' ng-mouseout='news.active = false'>"+
+                "<div class='flipper' ng-class='{flip: news.fade}'>"+
+                  "<div class='front' ng-bind-html='news.breaking'></div>"+
+                  "<div class='back'></div>"+
+                "</div>"+
+              "</div>",
     bindToController: true,
     controllerAs: "news",
     controller: ["$http", "$interval", "$timeout", "$scope", function($http, $interval, $timeout, $scope){
@@ -20,14 +26,12 @@ app.directive('newsTicker',  function() {
             if (i === list.length - 1) {
               i = 0;
             }
-            news.fade = true;
+            news.fade = !news.fade;
             $timeout(function () {
               news.breaking = list[i];
               i++;
-              $timeout(function () {
-                news.fade = false;
-              });
-            }, 500);
+              news.fade = !news.fade;
+            }, 700);
           }
         }, tickInterval);
 
