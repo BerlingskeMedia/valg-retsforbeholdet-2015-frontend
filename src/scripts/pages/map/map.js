@@ -16,7 +16,7 @@ app.controller("MapController", ["$scope", "$http", "$timeout", "tracker", funct
   };
 
   $scope.tickerCheck = function(){
-    if((window.location != window.parent.location) || window.innerWidth <= 800){
+    if((window.self !== window.top) || window.innerWidth <= 800){
       return false;
     }else {
       return true;
@@ -72,6 +72,6 @@ app.controller("MapController", ["$scope", "$http", "$timeout", "tracker", funct
 
   });
 
-  //tracker.track();
+  tracker.track();
 
 }]);

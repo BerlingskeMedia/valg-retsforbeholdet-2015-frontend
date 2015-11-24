@@ -9,7 +9,7 @@ app.service("tracker", ["$location" ,function($location){
         var appId = "retsforbeholdet";
         var appPath = $location.$$path;
 
-        if(url.split("upload").length === 2) {
+        if(url.split("retsforbeholdet_2015").length === 2) {
           var hostHash = url.split("#");
           var hostSlash = hostHash[0].split("/");
           var hostHtml = hostSlash[hostSlash.length - 1].split(".html");

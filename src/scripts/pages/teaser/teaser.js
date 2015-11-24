@@ -26,7 +26,7 @@ app.controller("TeaserController", ["$scope", "$http", "$timeout", "$routeParams
   };
 
   $scope.tickerCheck = function(){
-    if((window.location != window.parent.location) || window.innerWidth <= 800){
+    if((window.self !== window.top) || window.innerWidth <= 800){
       return false;
     }else {
       return true;
