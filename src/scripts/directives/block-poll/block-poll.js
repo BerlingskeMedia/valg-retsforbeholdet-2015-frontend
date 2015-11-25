@@ -118,7 +118,9 @@ app.directive('blockPoll', ["$window", "$filter", function($window, $filter) {
       };
 
       $window.onresize = function(){
-        scope.$apply();
+        if (!$scope.$$phase) {
+          $scope.$apply()
+        }
       };
 
       scope.$watch(function(){
