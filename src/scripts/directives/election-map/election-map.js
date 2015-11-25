@@ -1,7 +1,7 @@
-app.directive('electionMap', ["$filter", "$location", "$rootScope", function($filter, $location, $rootScope) {
+app.directive('electionMap', ["$filter", "$location", "$rootScope", "$sce", function($filter, $location, $rootScope, $sce) {
   return {
     restrict: "A",
-    templateUrl: "election-map.html",
+    templateUrl: $sce.trustAsResourceUrl("http://bem-hosting-valg.s3-website-eu-west-1.amazonaws.com/retsforbeholdet_2015/election-map.html"),
     link: function(scope, element, attrs){
       var svg = d3.select("#dk_valgkredse");
       var tip = d3.tip()
