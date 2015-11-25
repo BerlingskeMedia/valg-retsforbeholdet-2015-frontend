@@ -48,7 +48,7 @@ app.directive('newsTicker',  function() {
         }
       };
 
-      $http.get(apiIp + "/newsticker").then(function(data) {
+      $http.get(apiIp + "/newsticker?limit=15").then(function(data) {
           if(data.data) {
             news.breakingList = data.data;
             startTicker(news.breakingList);
