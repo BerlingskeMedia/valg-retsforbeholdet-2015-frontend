@@ -6,7 +6,11 @@ app.controller("TeaserController", ["$scope", "$http", "$timeout", "$routeParams
 
   $scope.json = $scope.json || {};
   $scope.json.map = {};
-  $scope.appUrl = "http://" + ($routeParams.url.replace('-', '/'));
+  if ($routeParams.url === undefined) {
+    $scope.appUrl = 'http://www.politiko.dk/retsforbeholdet/resultatet#/';
+  } else {
+    $scope.appUrl = "http://" + ($routeParams.url.replace('-', '/'));
+  }
 
   $scope.toggleshowPer = function(value) {
     if (enableMouseover === false) {

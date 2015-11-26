@@ -1,7 +1,8 @@
 'use strict';
 //var apiIp = "//fv15api.bemit.dk";
 //var apiIp = "//10.86.233.41:8081/fake";
-var apiIp = "//10.86.233.41:8081";
+// var apiIp = "http://10.86.233.41:8081";
+var apiIp = "http://retsforbeholdet2015.bemit.dk"
 
 var app = angular.module ("ng-app", [
   "ngTouch",
@@ -19,6 +20,10 @@ var app = angular.module ("ng-app", [
       .when("/",{
         templateUrl: "map.html",
         controller: "MapController"
+      })
+      .when("/teaser",{
+        templateUrl: "teaser.html",
+        controller: "TeaserController"
       })
       .when("/teaser/:url",{
         templateUrl: "teaser.html",
