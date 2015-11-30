@@ -1,8 +1,7 @@
 div.tab-container
   ul.tab-header
-    li.tab-nav.active(ng-click="tab='2011'", ng-show="json.map.status_code === 1") Afventer fintælling i kredse
-    li.tab-nav.active(ng-click="tab='2011'", ng-show="json.map.status_code === 0") Afventer optælling
-    li.tab-nav.active(ng-click="tab='2011'", ng-show="json.map.status_code === 12") Alle stemmer er optalt
+    li.tab-nav.active(ng-click="tab='2011'") {{json.map.status_text}}
+
   .clearfix
   div.tab-body(ng-click="toggleshowPer()" ng-if="detectmobile()")
     div.block-poll(block-poll)

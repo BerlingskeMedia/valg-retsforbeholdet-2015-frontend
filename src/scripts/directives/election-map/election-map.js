@@ -12,10 +12,8 @@ app.directive('electionMap', ["$filter", "$location", "$rootScope", "$sce", func
           var counted = $filter('number')(data.votes_pct, 1);
 
           var html = "<h2 class=\"map-tip-header\">";
-          if(data.status_code === 12){
-            html+= "<div class=\"map-tip-counted\">Alle stemmer optalt</div>";
-          }else if(data.status_code != 0){
-            html+= "<div class=\"map-tip-counted\">Afventer fintælling</div>";
+          if(data.status_code != 0){
+            html+= "<div class=\"map-tip-counted\">"+data.status_text+"</div>";
           }
           html += data.name + "</h2>";
           if (data.status_code === 0) {
