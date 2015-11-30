@@ -71,6 +71,11 @@ div.table-container
       div.pie
         pie-chart(data="[{label: 'Ja', value: json.table.results.JA.votes_pct, color: '#F96F00'},{label:'Nej', value: json.table.results.NEJ.votes_pct, color: '#152C34'}]", options="{thickness: 35, logoPath: 'u46.png', legend: false}")
 
+  div.awaiting-input(ng-if="json.table.areatype != 'D' && !json.table.locations.length")
+    span(ng-if="json.table.areatype == 'L'") Afventer optælling af storkredse
+    span(ng-if="json.table.areatype == 'S'") Afventer optælling af valgkredse
+    span(ng-if="json.table.areatype == 'K'") Afventer fintælling af valgsteder
+
   table.party-table.striped(ng-if="json.table.areatype != 'D' && json.table.locations.length")
     thead
       tr
