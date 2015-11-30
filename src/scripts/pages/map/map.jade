@@ -37,7 +37,7 @@ div.tab-container
   .clearfix
   p.help-text.mobile-hide Klik på kortet for at se kredsresultater, eller klik #[a(ng-href="#/resultater/landet") her] for at gå direkte til landsresultatet
 div.mobile-container.mobile-show
-  table.party-table.striped
+  table.party-table.striped(ng-if="json.map.locations.length")
     thead
       tr
         th.mobile-show(ng-click="changeOrder('-name')")

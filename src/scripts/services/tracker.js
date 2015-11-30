@@ -20,10 +20,6 @@ app.service("tracker", ["$location" ,function($location){
         }else {
           host = "politiko";
         }
-        console.log({
-          'pageview': host + "-" + appId + "/#" + appPath,
-          'url': url
-        });
         ga("send", "pageview", host + "-" + appId + "-" + appPath);
       }
     }

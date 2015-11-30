@@ -76,6 +76,9 @@
       };
 
       var resizeWindow = function(){
+        if (!$scope.data || !$scope.options || !$scope.data[0].value) {
+          return;
+        }
         if (promise) {
           $timeout.cancel(promise);
         }

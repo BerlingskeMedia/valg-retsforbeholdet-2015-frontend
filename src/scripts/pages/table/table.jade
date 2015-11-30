@@ -7,7 +7,7 @@ ul.breadcrumbs
 div.table-container
   h1.app-header {{json.table.name}}
   div.pie.mobile-show
-    pie-chart(data="[{label: 'Ja', value: json.table.results.JA.votes_pct, color: '#F96F00'},{label:'Nej', value: json.table.results.NEJ.votes_pct, color: '#152C34'}]", options="{thickness: 35, logoPath: 'u46.png', legend: false}")
+    pie-chart(data="[{label: 'Ja', value: json.table.results.JA.votes_pct, color: '#F96F00'},{label:'Nej', value: json.table.results.NEJ.votes_pct, color: '#152C34'}]", options="{thickness: 35, logoPath: 'http://bem-hosting-valg.s3-website-eu-west-1.amazonaws.com/retsforbeholdet_2015/u46.png', legend: false}")
   table.overview-table.mobile-show
     tr
       td Senest opdateret:
@@ -71,7 +71,7 @@ div.table-container
       div.pie
         pie-chart(data="[{label: 'Ja', value: json.table.results.JA.votes_pct, color: '#F96F00'},{label:'Nej', value: json.table.results.NEJ.votes_pct, color: '#152C34'}]", options="{thickness: 35, logoPath: 'u46.png', legend: false}")
 
-  table.party-table.striped(ng-if="json.table.areatype != 'D'")
+  table.party-table.striped(ng-if="json.table.areatype != 'D' && json.table.locations.length")
     thead
       tr
        th(ng-click="changeOrder('-name')")
