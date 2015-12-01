@@ -3,12 +3,12 @@ $dark-grey: #d5d5d5;
 $red: #F96F00;
 $black: #666;
 $white: #FFF;
-$light-red: rgba(249,111,0, 0.5);
+$light-red: rgba(249,111,0, 0.6);
 $lighter-red: lighten($red, 40);
 $blue: #152C34;
-$light-blue: rgba(21,44,52, 0.5);
+$light-blue: rgba(21,44,52, 0.6);
 $lighter-blue: lighten($blue, 40);
-$neutral: rgba(170,170,170,0.5);
+$neutral: rgba(170,170,170,0.4);
 
 [ng-app] {
   font-family: $main-font;
