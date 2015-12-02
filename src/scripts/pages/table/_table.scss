@@ -14,10 +14,16 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  &.mobile-show-force{
+    float: none;
+    width:  100%;
+  }
 }
 
 .overview-table {
   width: 70%;
+
   td {
     background-color: $white;
     &:nth-child(even) {
@@ -26,6 +32,16 @@
     }
     &:nth-child(odd) {
       font-weight: 600;
+    }
+  }
+  &.mobile-show-force{
+    width: 100%;
+
+    td {
+      width: 50%;
+      box-sizing: border-box;
+      border: none;
+      border-bottom: 2px solid $grey;
     }
   }
 }

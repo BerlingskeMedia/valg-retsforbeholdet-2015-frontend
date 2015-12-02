@@ -4,11 +4,11 @@ ul.breadcrumbs
   li.breadcrumb(ng-repeat="hier in json.table.hierarchy")
     a(ng-href="#/resultater{{hier.path}}") {{hier.name}}
 .clearfix
-div.table-container
+div.table-container(table-flex)
   h1.app-header {{json.table.name}}
-  div.pie.mobile-show
+  div.pie.mobile-show(ng-class="{'mobile-show-force': $root.forceMobileView}")
     pie-chart(data="[{label: 'Ja', value: json.table.results.JA.votes_pct, color: '#F96F00'},{label:'Nej', value: json.table.results.NEJ.votes_pct, color: '#152C34'}]", options="{thickness: 35, logoPath: 'http://bem-hosting-valg.s3-website-eu-west-1.amazonaws.com/retsforbeholdet_2015/u46.png', legend: false}")
-  table.overview-table.mobile-show
+  table.overview-table.mobile-show(ng-class="{'mobile-show-force': $root.forceMobileView}")
     tr
       td Senest opdateret:
       td {{convertDate(json.table.result_time) | date:'dd-MM-yyyy, kl. HH:mm'}}
@@ -39,7 +39,7 @@ div.table-container
       td(ng-if="json.table.areatype == 'K'") Optalte valgsteder:
       td(ng-if="json.table.areatype != 'D'") {{json.table.locations_completed}} af {{json.table.locations_total}}
 
-  div.table-flextop.mobile-hide
+  div.table-flextop.mobile-hide(ng-class="{'mobile-hide-force': $root.forceMobileView}")
     table.overview-table
       tr
         td Senest opdateret:

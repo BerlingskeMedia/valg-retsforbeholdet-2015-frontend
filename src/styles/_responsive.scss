@@ -5,6 +5,12 @@
 
   .mobile-show {
     display: none;
+    &.mobile-show-force{
+      display: table;
+    }
+  }
+  .mobile-hide.mobile-hide-force{
+    display: none;
   }
 }
 
@@ -21,6 +27,9 @@
 
   .mobile-hide {
     display: none;
+    &.mobile-show-force{
+      display: block;
+    }
   }
 
   .map-tip {
