@@ -31,7 +31,7 @@ app.controller("TeaserController", ["$scope", "$http", "$timeout", "$routeParams
 
   $scope.tickerCheck = function(){
     var ref = document.referrer;
-    if(ref.match("politiko") && ref.match("politiko").length && window.innerWidth <= 800){
+    if(ref.match("politiko") && ref.match("politiko").length && window.innerWidth >= 800){
       return true;
     }else if((window.self !== window.top) || window.innerWidth <= 800){
       return false;
