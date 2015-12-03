@@ -36,7 +36,7 @@ div.table-container(table-flex)
     tr(ng-if="json.table.areatype != 'D'")
       td(ng-if="json.table.areatype == 'L'") Optalte storkredse:
       td(ng-if="json.table.areatype == 'S'") Optalte kredse:
-      td(ng-if="json.table.areatype == 'K'") Optalte valgsteder:
+      td(ng-if="json.table.areatype == 'K'") Valgsteder med afsluttet finoptælling:
       td(ng-if="json.table.areatype != 'D'") {{json.table.locations_completed}} af {{json.table.locations_total}}
 
   div.table-flextop.mobile-hide(ng-class="{'mobile-hide-force': $root.forceMobileView}")
@@ -64,7 +64,7 @@ div.table-container(table-flex)
       tr(ng-if="json.table.areatype != 'D'")
         td(ng-if="json.table.areatype == 'L'") Optalte storkredse:
         td(ng-if="json.table.areatype == 'S'") Optalte kredse:
-        td(ng-if="json.table.areatype == 'K'") Optalte valgsteder:
+        td(ng-if="json.table.areatype == 'K'") Valgsteder med afsluttet finoptælling:
         td(ng-if="json.table.areatype != 'D'") {{json.table.locations_completed}} af {{json.table.locations_total}}
         td.mobile-hide
         td.mobile-hide
