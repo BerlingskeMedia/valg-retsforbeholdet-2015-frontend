@@ -3,7 +3,7 @@ div.tab-container
     span {{json.map.status_text}}
     a(ng-href="{{appUrl}}" target="_top").call-to-action.mobile-hide Klik her for at følge valgets udvikling
     .clearfix
-  div.tab-body(ng-if="!detectmobile()")
+  div.tab-body
     div.block-poll(block-poll ng-mouseover="toggleshowPer(false)" ng-mouseout="toggleshowPer(true)")
     div.news-ticker(news-ticker ng-if="tickerCheck()")
   .clearfix
