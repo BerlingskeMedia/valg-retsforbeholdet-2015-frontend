@@ -1,5 +1,5 @@
 
-app.controller("TeaserController", ["$scope", "$http", "$timeout", "$routeParams", function($scope, $http, $timeout, $routeParams) {
+app.controller("TeaserController", ["$scope", "$http", "$timeout", "$routeParams", "$location", function($scope, $http, $timeout, $routeParams, $location) {
 
   var doubleClickCheck = false;
   var enableMouseover = false;
@@ -30,7 +30,10 @@ app.controller("TeaserController", ["$scope", "$http", "$timeout", "$routeParams
   };
 
   $scope.tickerCheck = function(){
-    if((window.self !== window.top) || window.innerWidth <= 800){
+    var host = $location.$$host;
+    if(host === "www.politiko.dk" && window.innerWidth <= 800){
+      return true;
+    }else if((window.self !== window.top) || window.innerWidth <= 800){
       return false;
     }else {
       return true;
