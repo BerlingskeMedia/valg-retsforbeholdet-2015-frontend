@@ -11,7 +11,7 @@ div.table-container(table-flex)
   table.overview-table.mobile-show(ng-class="{'mobile-show-force': $root.forceMobileView}")
     tr
       td Senest opdateret:
-      td {{convertDate(json.table.result_time) | date:'dd-MM-yyyy, kl. HH:mm'}}
+      td {{convertDate(json.table.result_time)}}
     tr
       td Stemmeberettigede:
       td.number {{json.table.votes_allowed | number}}
@@ -43,7 +43,7 @@ div.table-container(table-flex)
     table.overview-table
       tr
         td Senest opdateret:
-        td {{convertDate(json.table.result_time) | date:'dd-MM-yyyy, kl. HH:mm'}}
+        td {{convertDate(json.table.result_time)}}
         td Stemmeberettigede:
         td.number {{json.table.votes_allowed | number}}
       tr

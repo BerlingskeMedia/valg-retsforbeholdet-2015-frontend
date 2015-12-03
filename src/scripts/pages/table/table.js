@@ -29,7 +29,10 @@ app.controller("TableController", ["$scope", "$http", "$routeParams", "tracker",
   };
 
   $scope.convertDate = function(datetime){
-    return new Date(datetime);
+    if(datetime) {
+      var newDate = datetime.split(/[ -]/);
+      return newDate[2] + "-" + newDate[1] + "-" + newDate[0] + ", kl." + newDate[3];
+    }
   };
 
   $http.get(apiIp + "/" + apiUrl).success(function(data) {
